@@ -100,7 +100,7 @@ namespace Wpf
             CoverViewModel coverViewModel = new CoverViewModel();
 
             string i = indexViewModel.test() + coverViewModel.test();
-            MessageBox.Show(i);  
+            MessageBox.Show(i);    
         }
     }
 }
