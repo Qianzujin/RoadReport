@@ -23,14 +23,14 @@ namespace Wpf.ViewModel
             indexView.Add(index);
         }
 
-        private void SelectIndexData() 
+        private void SelectIndexData()
         {
             index = indexDao.Get(); //使用Dao层获取数据
         }
 
-        public ObservableCollection<Index> IndexView 
+        public ObservableCollection<Index> IndexView
         {
-            get { return indexView; } 
+            get { return indexView; }
             set { indexView = value; RaisePropertyChanged(); }
         }
 

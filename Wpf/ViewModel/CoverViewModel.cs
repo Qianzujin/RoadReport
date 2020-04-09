@@ -23,12 +23,12 @@ namespace Wpf.ViewModel
             coverView.Add(cover);
         }
 
-        private void SelectCoverData() 
+        private void SelectCoverData()
         {
             cover = coverDao.Get(); //使用Dao层获取数据
         }
 
-        public ObservableCollection<Cover> CoverView  
+        public ObservableCollection<Cover> CoverView
         {
             get { return coverView; }
             set { coverView = value; RaisePropertyChanged(); }
