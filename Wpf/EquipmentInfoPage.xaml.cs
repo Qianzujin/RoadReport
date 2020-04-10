@@ -17,16 +17,15 @@ using Wpf.ViewModel;
 namespace Wpf
 {
     /// <summary>
-    /// coverInfoPage.xaml 的交互逻辑
+    /// EquipmentInfoPage.xaml 的交互逻辑
     /// </summary>
-    public partial class CoverInfoPage : Page
+    public partial class EquipmentInfoPage : Page
     {
-
-        public CoverInfoPage()
+        public EquipmentInfoPage()
         {
-            CoverViewModel coverViewModel = new CoverViewModel();
+            EquipmentViewModel equipmentViewModel = new EquipmentViewModel();
             InitializeComponent();
-            this.DataContext = coverViewModel;
+            this.DataContext = equipmentViewModel;
         }
     }
 }

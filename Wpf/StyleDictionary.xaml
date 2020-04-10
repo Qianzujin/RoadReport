@@ -2,6 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Wpf">
 
+    <!--Lable图标略过变色-->
     <Style x:Key="LabelMouseOver" TargetType="{x:Type Label}">
         <Setter Property="Template" >
             <Setter.Value>
@@ -18,6 +19,105 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!--GridDataStyle 表单样式-->
+    <Style x:Key="DataGridStyle" TargetType="DataGrid">
+        <Setter Property="HeadersVisibility" Value="Column" ></Setter>
+        <Setter Property="ColumnHeaderStyle" Value="{DynamicResource ColumnHeaderStyle}"></Setter>
+        <Setter Property="CellStyle" Value="{DynamicResource CellStyle}"></Setter>
+        <Setter Property="RowStyle" Value="{DynamicResource RowStyle}"></Setter>
+        <Setter Property="Background" Value="White"></Setter>
+        <Setter Property="EnableRowVirtualization" Value="False"></Setter>
+        <Setter Property="GridLinesVisibility" Value="None"></Setter>
+        <Setter Property="CanUserAddRows" Value="False"></Setter>
+        <!--禁止在尾行手动添加数据-->
+        <Setter Property="AutoGenerateColumns" Value="False"></Setter>
+        <Setter Property="IsEnabled" Value="True"></Setter>
+        <Setter Property="BorderThickness" Value="0"></Setter>
+    </Style>
+    <Style x:Key="ColumnHeaderStyle" TargetType="DataGridColumnHeader">
+        <Setter Property="Height" Value="35"></Setter>
+        <Setter Property="Background" Value="#F2F2F2"></Setter>
+        <Setter Property="BorderThickness" Value="0.5"></Setter>
+        <Setter Property="BorderBrush" Value="#CBCBCB"></Setter>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+        <!--水平居中-->
+        <Setter Property="HorizontalContentAlignment" Value="Center"></Setter>
+        <!--垂直居中-->
+    </Style>
+
+    <Style x:Key="RowStyle" TargetType="DataGridRow">
+        <Setter Property="Cursor" Value="Hand"></Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="#F2F2F2"/>
+            </Trigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsSelected" Value="True"></Condition>
+                    <Condition Property="IsFocused" Value="True"></Condition>
+                </MultiTrigger.Conditions>
+                <Setter Property="Background" Value="#F2F2F2"/>
+            </MultiTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="CellStyle" TargetType="DataGridCell">
+        <Setter Property="Height" Value="35"></Setter>
+        <Setter Property="FontSize" Value="13"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGridCell">
+                    <Border x:Name="Bg" Background="Transparent" BorderThickness="0.5" UseLayoutRounding="True" BorderBrush="#FFCBCBCB">
+                        <ContentPresenter HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                    </Border>
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="Background"  Value="#CBCBCB" />
+                <Setter Property="Foreground" Value="#000000" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <!--Button 删除按钮样式-->
+    <Style x:Key="DeleteButton" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#E70834"></Setter>
+        <Setter Property="Foreground" Value="White"></Setter>
+        <Setter Property="Template" >
+            <Setter.Value >
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"   BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0" CornerRadius="7,7,7,7">
+                        <ContentPresenter    Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Button 编辑按钮样式-->
+    <Style x:Key="EditButton" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="#999999"></Setter>
+        <Setter Property="Template" >
+            <Setter.Value >
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border Background="{TemplateBinding Background}"   BorderBrush="{TemplateBinding Control.BorderBrush}" BorderThickness="0.5" CornerRadius="5,5,5,5">
+                        <ContentPresenter    Content="{TemplateBinding ContentControl.Content}" HorizontalAlignment="Center" VerticalAlignment="Center" ></ContentPresenter>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="#008FEE"></Setter>
+                <Setter Property="Background" Value="#ADECFC"></Setter>
+            </Trigger>
+        </Style.Triggers>
     </Style>
 
 </ResourceDictionary>

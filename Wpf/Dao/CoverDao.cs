@@ -11,12 +11,13 @@ namespace Wpf.Dao
     class CoverDao : ObservableObject
     {
         Cover cover;
-        public CoverDao() {
-            cover = new Cover { Theme="主题", TestItems="测试目的"};
+        public CoverDao()
+        {
+            cover = new Cover { Theme = "主题", TestItems = "测试目的" };
         }
         public void Set(Cover cv)
         {
-            cover = cv; 
+            cover = cv;
         }
         public Cover Get()
         {

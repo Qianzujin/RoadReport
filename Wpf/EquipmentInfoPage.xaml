@@ -1,0 +1,33 @@
+﻿<Page x:Class="Wpf.EquipmentInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="EquipmentInfoPage">
+
+    <Grid>
+        <StackPanel Margin="20">
+            <DataGrid Width="880" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding EquipmentView}">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="145" Header="仪器名称" Binding="{Binding Name}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="145"  Header="仪器编号" Binding="{Binding Code}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="245" Header="仪器有效期" Binding="{Binding Path=TermOfValidity,StringFormat='yyyy年MM月dd日 HH:mm:ss'}"></DataGridTextColumn>
+                    <DataGridTextColumn Width="180"  Header="仪器图片" Binding="{Binding Picture}"></DataGridTextColumn>
+                    <DataGridTemplateColumn Width="*"  Header="操作">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                                    <Button Style="{StaticResource EditButton}" Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
+                                    <Button Style="{StaticResource DeleteButton}"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </StackPanel>
+    </Grid>
+</Page>

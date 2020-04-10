@@ -86,17 +86,27 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Dao\CoverDao.cs" />
+    <Compile Include="Dao\EquipmentDao.cs" />
     <Compile Include="Dao\IndexDao.cs" />
+    <Compile Include="EquipmentInfoPage.xaml.cs">
+      <DependentUpon>EquipmentInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Index.cs" />
     <Compile Include="ViewModel\CoverViewModel.cs" />
+    <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="coverInfoPage.xaml">
+    <Page Include="CoverInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="indexInfoPage.xaml">
+    <Page Include="EquipmentInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="IndexInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -108,11 +118,11 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="coverInfoPage.xaml.cs">
-      <DependentUpon>coverInfoPage.xaml</DependentUpon>
+    <Compile Include="CoverInfoPage.xaml.cs">
+      <DependentUpon>CoverInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="indexInfoPage.xaml.cs">
-      <DependentUpon>indexInfoPage.xaml</DependentUpon>
+    <Compile Include="IndexInfoPage.xaml.cs">
+      <DependentUpon>IndexInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

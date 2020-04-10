@@ -1,4 +1,4 @@
-﻿<Page x:Class="Wpf.coverInfoPage"
+﻿<Page x:Class="Wpf.CoverInfoPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,8 +10,8 @@
 
     <Grid>
         <StackPanel DataContext="{Binding CoverView}" >
-        <TextBlock Text="{Binding Theme}" FontSize="99"></TextBlock>
-        <TextBlock Text="{Binding TestItems}" FontSize="99"></TextBlock>
+            <TextBlock Text="{Binding Theme}" FontSize="99"></TextBlock>
+            <TextBlock Text="{Binding TestItems}" FontSize="99"></TextBlock>
         </StackPanel>
     </Grid>
 </Page>

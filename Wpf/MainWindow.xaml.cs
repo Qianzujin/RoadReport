@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Wpf;
 using Wpf.ViewModel;
 
 namespace Wpf
@@ -38,6 +39,8 @@ namespace Wpf
             menuNameList.Add(new MenuName { Index = 1, Icon = "\xe653", SheetName = "目录信息" });
             menuNameList.Add(new MenuName { Index = 2, Icon = "\xe654", SheetName = "结论信息" });
             menuNameList.Add(new MenuName { Index = 3, Icon = "\xe655", SheetName = "轮胎信息" });
+            menuNameList.Add(new MenuName { Index = 4, Icon = "\xe65a", SheetName = "仪器信息" });
+
             this.SheetMenuListBox.ItemsSource = menuNameList;
          
         }
@@ -56,11 +59,15 @@ namespace Wpf
 
             if (this.SheetMenuListBox.SelectedIndex == 0)
             {
-                this.Change_Page.NavigationService.Navigate(new indexInfoPage());
+                this.Change_Page.NavigationService.Navigate(new IndexInfoPage());
             }
             else if (this.SheetMenuListBox.SelectedIndex == 1)
             {
-                this.Change_Page.NavigationService.Navigate(new coverInfoPage());
+                this.Change_Page.NavigationService.Navigate(new CoverInfoPage());
+            }
+            else if (this.SheetMenuListBox.SelectedIndex == 4)
+            {
+                this.Change_Page.NavigationService.Navigate(new EquipmentInfoPage());   
             }
         }
 

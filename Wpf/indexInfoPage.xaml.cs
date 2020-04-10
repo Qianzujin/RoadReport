@@ -19,9 +19,9 @@ namespace Wpf
     /// <summary>
     /// indexInfoPage.xaml 的交互逻辑
     /// </summary>
-    public partial class indexInfoPage : Page
+    public partial class IndexInfoPage : Page
     {
-        public indexInfoPage()
+        public IndexInfoPage()
         {
             IndexViewModel indexViewModel = new IndexViewModel();
             InitializeComponent();

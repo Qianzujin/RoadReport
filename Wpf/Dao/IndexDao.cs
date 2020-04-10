@@ -11,14 +11,15 @@ namespace Wpf.Dao
     class IndexDao : ObservableObject
     {
         Index index;
-        public IndexDao() {
+        public IndexDao()
+        {
             index = new Index { IndexName = "目录名字", IndexPage = "1" };
         }
         public void Set(Index idx)
         {
             index = idx;
         }
-        public Index Get() 
+        public Index Get()
         {
             return index;
         }
