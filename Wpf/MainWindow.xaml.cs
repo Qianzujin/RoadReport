@@ -22,6 +22,11 @@ namespace Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        //声明Page
+        IndexInfoPage indexInfoPage;
+        CoverInfoPage coverInfoPage;
+        EquipmentInfoPage equipmentInfoPage;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -42,7 +47,15 @@ namespace Wpf
             menuNameList.Add(new MenuName { Index = 4, Icon = "\xe65a", SheetName = "仪器信息" });
 
             this.SheetMenuListBox.ItemsSource = menuNameList;
-         
+            InitPage();
+        }
+
+
+        public void InitPage()
+        {
+            indexInfoPage = new IndexInfoPage();
+            coverInfoPage = new CoverInfoPage();
+            equipmentInfoPage = new EquipmentInfoPage();
         }
 
         public class MenuName
@@ -59,15 +72,15 @@ namespace Wpf
 
             if (this.SheetMenuListBox.SelectedIndex == 0)
             {
-                this.Change_Page.NavigationService.Navigate(new IndexInfoPage());
+                this.Change_Page.NavigationService.Navigate(indexInfoPage);
             }
             else if (this.SheetMenuListBox.SelectedIndex == 1)
             {
-                this.Change_Page.NavigationService.Navigate(new CoverInfoPage());
+                this.Change_Page.NavigationService.Navigate(coverInfoPage);
             }
             else if (this.SheetMenuListBox.SelectedIndex == 4)
             {
-                this.Change_Page.NavigationService.Navigate(new EquipmentInfoPage());   
+                this.Change_Page.NavigationService.Navigate(equipmentInfoPage);   
             }
         }
 

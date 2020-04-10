@@ -10,7 +10,7 @@ using Wpf.Model;
 
 namespace Wpf.ViewModel
 {
-    class EquipmentViewModel : ViewModelBase
+    public class EquipmentViewModel : ViewModelBase
     {
         EquipmentDao equipmentDao = new EquipmentDao();//构造Dao对象用于查询或者持久化仪器数据
         List<Equipment> equipmentList = new List<Equipment>();//构造仪器列表存储Dao层查询的仪器数据
@@ -24,7 +24,7 @@ namespace Wpf.ViewModel
             UpdateViewData();
         }
 
-        //更新视图对象数据  遍历赋值
+        //更新视图对象数据  遍历赋值 *更新视图前保证视图数据最新可以调用SelectAllEquipment
         public void UpdateViewData()
         {
             foreach (var item in equipmentList)
@@ -33,9 +33,10 @@ namespace Wpf.ViewModel
             }
         }
 
-        //查询所有仪器
+        //查询所有仪器 从持久化数据获取视图数据
         public void SelectAllEquipment()
         {
+            equipmentList.Clear();
             equipmentList = equipmentDao.SelectAllEquipment();
         }
 
@@ -44,6 +45,14 @@ namespace Wpf.ViewModel
         {
             get { return equipmentView; }
             set { equipmentView = value; RaisePropertyChanged(); }
+        }
+
+        public void SubmitData( Equipment equ)
+        {
+            equipmentDao.UpdateData(equ);//持久化数据
+            //更新视图数据
+            SelectAllEquipment();
+            UpdateViewData();
         }
     }
 }
