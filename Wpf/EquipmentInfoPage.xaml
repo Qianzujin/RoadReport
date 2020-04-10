@@ -19,7 +19,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Width="145" Header="仪器名称" Binding="{Binding Name,Mode=TwoWay}"></DataGridTextColumn>
                 <DataGridTextColumn Width="145"  Header="仪器编号" Binding="{Binding Code,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn Width="245" Header="仪器有效期" Binding="{Binding Path=TermOfValidity,StringFormat='yyyy年MM月dd日 HH:mm:ss'}"></DataGridTextColumn>
+                <DataGridTextColumn Width="245" Header="仪器有效期" Binding="{Binding TermOfValidity,StringFormat='yyyy年MM月dd日 HH:mm:ss' ,Mode=TwoWay}"></DataGridTextColumn>
                 <DataGridTextColumn Width="180"  Header="仪器图片" Binding="{Binding Picture}"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="*"  Header="操作">
                     <DataGridTemplateColumn.CellTemplate>

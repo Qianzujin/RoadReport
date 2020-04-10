@@ -63,15 +63,16 @@ namespace Wpf
 
         private void Submit(object sender, RoutedEventArgs e)
         {
-
-                Equipment equ = new Equipment
+            MessageBox.Show(this.datePicker.Text);
+            MessageBox.Show(this.datePicker.DataContext.ToString());
+            Equipment equ = new Equipment
                 {
                     Name = this.nameTxtBox.Text,
                     Code = this.codeTxtBox.Text,
                     TermOfValidity = Convert.ToDateTime(this.datePicker.Text),
                     Picture = (BitmapImage)img.Source
                 };
-                equipmentViewModelSelf.SubmitData( equ);
+                equipmentViewModelSelf.SubmitData(equ);
             }
    
         }
