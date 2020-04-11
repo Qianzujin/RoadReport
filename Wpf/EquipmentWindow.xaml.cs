@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,9 +23,7 @@ namespace Wpf
     /// </summary>
     public partial class EquipmentWindow : Window
     {
-        EquipmentViewModel equipmentViewModelSelf;
-
-        public EquipmentWindow(Equipment equ, EquipmentViewModel equipmentViewModel)
+        public EquipmentWindow(Equipment equ)
         {
             InitializeComponent();
             this.MouseLeftButtonDown += (sender, e) =>
@@ -35,7 +35,7 @@ namespace Wpf
             };
 
             this.DataContext = equ;
-            this.equipmentViewModelSelf = equipmentViewModel;
+
         }
 
 
@@ -46,35 +46,30 @@ namespace Wpf
             this.Close();
         }
 
-        private void Max(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
         private void Min(object sender, MouseButtonEventArgs e)
         {
-
+            if (this.WindowState != WindowState.Minimized)
+            {
+                this.WindowState = WindowState.Minimized;
+            }
         }
 
+        //修改图片信息
         private void LoadImage(object sender, RoutedEventArgs e)
         {
-            this.img.Source = new BitmapImage(new Uri(@"./Resources/轮胎.png", UriKind.Relative));
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "jpg图片|*.jpg|png图片|*.png|所有文件|*.*";
+            fileDialog.ShowDialog();
+
+            if (fileDialog.FileName != "")
+            {
+                //获取文件名，复制到相对路径下
+                System.IO.Path.GetFileName(fileDialog.FileName);
+                File.Copy(fileDialog.FileName, Environment.CurrentDirectory + "\\Resources\\Picture\\" + System.IO.Path.GetFileName(fileDialog.FileName), true);
+                this.img.Source = new BitmapImage(new Uri(@"/Wpf;component/Resources/" + System.IO.Path.GetFileName(fileDialog.FileName), UriKind.Relative));
+            }
         }
 
-        private void Submit(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(this.datePicker.Text);
-            MessageBox.Show(this.datePicker.DataContext.ToString());
-            Equipment equ = new Equipment
-                {
-                    Name = this.nameTxtBox.Text,
-                    Code = this.codeTxtBox.Text,
-                    TermOfValidity = Convert.ToDateTime(this.datePicker.Text),
-                    Picture = (BitmapImage)img.Source
-                };
-                equipmentViewModelSelf.SubmitData(equ);
-            }
-   
-        }
     }
+}
 

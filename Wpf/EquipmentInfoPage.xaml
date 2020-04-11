@@ -17,16 +17,24 @@
         </Grid.RowDefinitions>
         <DataGrid Name="equipmentDataGrid" Grid.Row="1" Width="880" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding EquipmentView}">
             <DataGrid.Columns>
-                <DataGridTextColumn Width="145" Header="仪器名称" Binding="{Binding Name,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn Width="145"  Header="仪器编号" Binding="{Binding Code,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn Width="245" Header="仪器有效期" Binding="{Binding TermOfValidity,StringFormat='yyyy年MM月dd日 HH:mm:ss' ,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn Width="180"  Header="仪器图片" Binding="{Binding Picture}"></DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="True" Width="145" Header="仪器名称" Binding="{Binding Name,Mode=TwoWay}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Width="145"  Header="仪器编号" Binding="{Binding Code,Mode=TwoWay}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Width="245" Header="仪器有效期" Binding="{Binding TermOfValidity,StringFormat='yyyy年MM月dd日 HH:mm:ss' ,Mode=TwoWay}"></DataGridTextColumn>
+                <!-- <DataGridTextColumn Width="180"  Header="仪器图片" Binding="{Binding Picture}"></DataGridTextColumn>-->
+                <DataGridTemplateColumn Width="180" Header="仪器图片">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding Picture}"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
                 <DataGridTemplateColumn Width="*"  Header="操作">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                                <Button Click="EditClick" Style="{StaticResource EditButton}" Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
-                                <Button Style="{StaticResource DeleteButton}"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
+                                <Button  Style="{StaticResource EditButton}" Click="EditClick" Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
+                                <Button Command="{Binding  RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:EquipmentInfoPage}},Path=DataContext.SelectedCommand,Mode=TwoWay}"   Style="{StaticResource DeleteButton}"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

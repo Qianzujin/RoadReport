@@ -27,8 +27,7 @@ namespace Wpf
         {
            
             InitializeComponent();
-            this.DataContext = equipmentViewModel;
-
+            this.DataContext = equipmentViewModel;            
         }
 
         public void Refresh()
@@ -42,9 +41,19 @@ namespace Wpf
         {
             //获取当前数据传给修改窗口
             var equ = (Equipment)this.equipmentDataGrid.SelectedItem; 
-            EquipmentWindow equipmentWindow = new EquipmentWindow(equ , equipmentViewModel);
+            EquipmentWindow equipmentWindow = new EquipmentWindow(equ);
             equipmentWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            equipmentWindow.Show();         
+            equipmentWindow.ShowDialog();       
+        }
+
+        private void DeleteClick(object sender, RoutedEventArgs e)
+        {
+            var equ = (Equipment)this.equipmentDataGrid.SelectedItem;
+            equipmentViewModel.DeleteData(equ);
+
+           //BindingExpression binding = this.equipmentDataGrid.GetBindingExpression(DataGrid.DataContextProperty);
+           //binding.UpdateSource();
+
         }
     }
 }

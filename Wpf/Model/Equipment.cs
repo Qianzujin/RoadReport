@@ -9,9 +9,10 @@ namespace Wpf.Model
 {
     public class Equipment
     {
+        public int Index { get; set; }
         public string Name { get; set; }
         public string Code { get; set; }
         public DateTime TermOfValidity { get; set; }
         public BitmapImage Picture { get; set; } 
-    }
+    } 
 }
