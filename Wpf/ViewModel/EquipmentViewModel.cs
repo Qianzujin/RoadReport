@@ -83,14 +83,15 @@ namespace Wpf.ViewModel
             UpdateViewData();
         }
 
-        private void Update(Equipment equ)
+        public void Update(Equipment equ)
         {
             for (int i = 0; i < equipmentViewList.Count(); i++)
             {
                 if (equipmentViewList[i].Index == equ.Index)
                 {
                     equipmentViewList[i] = equ;
-                    equipmentDao.UpdateData(equ);
+                    //equipmentDao.UpdateData(equ);
+                    equipmentDao.Update(equ);
                 }
             }
             UpdateViewData();
