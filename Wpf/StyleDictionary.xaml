@@ -100,9 +100,9 @@
         </Setter>
     </Style>
 
-    <!--Button 编辑按钮样式-->
-    <Style x:Key="EditButton" TargetType="{x:Type Button}">
-        <Setter Property="Foreground" Value="#999999"></Setter>
+    <!--Button按钮样式-->
+    <Style x:Key="ButtonNormal" TargetType="{x:Type Button}">
+        <Setter Property="Foreground" Value="Black"></Setter>
         <Setter Property="Template" >
             <Setter.Value >
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -116,10 +116,12 @@
             <Trigger Property="IsMouseOver" Value="True">
                 <Setter Property="Foreground" Value="#008FEE"></Setter>
                 <Setter Property="Background" Value="#ADECFC"></Setter>
+                <Setter Property="Cursor" Value="Hand"></Setter>
             </Trigger>
         </Style.Triggers>
     </Style>
 
+   
 
     <!--CheckBox选中按钮-->
     <Style x:Key="CheckBoxStyle" TargetType="CheckBox">

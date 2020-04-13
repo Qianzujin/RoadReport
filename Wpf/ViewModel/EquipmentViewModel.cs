@@ -17,20 +17,24 @@ namespace Wpf.ViewModel
     {
         EquipmentDao equipmentDao = new EquipmentDao();//构造Dao对象用于查询或者持久化仪器数据
         List<Equipment> equipmentViewList = new List<Equipment>();//构造仪器列表存储Dao层查询的仪器数据
-
-        private ObservableCollection<Equipment> equipmentView = new ObservableCollection<Equipment>();
+        private ObservableCollection<Equipment> equipmentView = new ObservableCollection<Equipment>();//视图层数据对象
 
         //视图模型构造函数
         public EquipmentViewModel()
         {
             SelectAllEquipment();
             UpdateViewData();
-            SelectedCommand = new RelayCommand<List<Equipment>>(t => Select(t));
+            DeleteCommand = new RelayCommand<int>(Index => Delete(Index));
+            UpdateCommand = new RelayCommand<Equipment>(equ => Update(equ));
+            SelectCommand = new RelayCommand<List<string>>(filterList => Select(filterList));
+            AddCommand = new RelayCommand<Equipment>(equ => Add(equ));
+
         }
 
         //更新视图对象数据  遍历赋值 *更新视图前保证视图数据最新可以调用SelectAllEquipment
         public void UpdateViewData()
         {
+            equipmentView.Clear();
             foreach (var item in equipmentViewList)
             {
                 equipmentView.Add(item);
@@ -40,9 +44,8 @@ namespace Wpf.ViewModel
         //查询所有仪器 从持久化数据获取视图数据
         public void SelectAllEquipment()
         {
-            var tmp = equipmentDao.SelectAllEquipment();
             equipmentViewList.Clear();
-            equipmentViewList = tmp;
+            equipmentViewList = equipmentDao.SelectAllEquipment();
         }
 
         //视图对象
@@ -58,19 +61,57 @@ namespace Wpf.ViewModel
             equipmentDao.UpdateData(equ);
         }
 
-        public void DeleteData(Equipment equ)
-        {
-            equipmentDao.DeleteData(equ);
-        }
-
         // Commandes
-        public RelayCommand<List<Equipment>> SelectedCommand { get; set; }
 
-        private void Select(List<Equipment> t)
+        // 删除命令
+        public RelayCommand<int> DeleteCommand { get; set; }
+        public RelayCommand<Equipment> UpdateCommand { get; set; }
+        public RelayCommand<List<string>> SelectCommand { get; set; }
+        public RelayCommand<Equipment> AddCommand { get; set; }
+
+        // 删除函数
+        private void Delete(int Index) 
         {
-            equipmentViewList.RemoveAt(1);
-            equipmentView.Clear();
+           for (int i = 0; i < equipmentViewList.Count(); i++)
+           {
+               if (equipmentViewList[i].Index == Index)
+               {
+                   equipmentViewList.RemoveAt(i);
+                    equipmentDao.DeleteData(Index);
+               }
+           }
             UpdateViewData();
         }
+
+        private void Update(Equipment equ)
+        {
+            for (int i = 0; i < equipmentViewList.Count(); i++)
+            {
+                if (equipmentViewList[i].Index == equ.Index)
+                {
+                    equipmentViewList[i] = equ;
+                    equipmentDao.UpdateData(equ);
+                }
+            }
+            UpdateViewData();
+        }
+
+        private void Add(Equipment equ) 
+        {
+            //equipmentViewList.Add(equ);
+            equipmentDao.AddData(equ);          
+            UpdateViewData();
+
+        }
+
+
+        private void Select(List<string> filterList)
+        {
+            equipmentViewList = equipmentDao.SelectAllEquipment();
+            var retList = equipmentViewList.Where(a => a.Name.Contains(filterList[0]) && a.Code.Contains(filterList[1])).ToList();
+            equipmentViewList = retList;
+            UpdateViewData();
+        }
+
     }
 }

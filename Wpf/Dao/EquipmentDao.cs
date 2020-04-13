@@ -17,7 +17,7 @@ namespace Wpf.Dao
             for (int i = 0; i < 100; i++)
             {
                 //轮胎.png
-                equipmentList.Add(new Equipment { Index=i,  Name = i.ToString(), Code = "A", TermOfValidity = new DateTime(2007, 1, 1, 21, 21, 21), Picture = new BitmapImage(new Uri(@"./Resources/轮胎.png", UriKind.Relative)) });
+                equipmentList.Add(new Equipment { Index=i, IsChecked=false, Name = i.ToString(), Code = "A", TermOfValidity = new DateTime(2007, 1, 1, 21, 21, 21), Picture = new BitmapImage(new Uri(@"./Resources/轮胎.png", UriKind.Relative)) });
             }
         }
 
@@ -32,25 +32,26 @@ namespace Wpf.Dao
             {
                 if (equipmentList[i].Index == equ.Index)
                 {
-                    equipmentList[i].Name = equ.Name;
-                    equipmentList[i].Code = equ.Code;
-                    equipmentList[i].TermOfValidity = equ.TermOfValidity;
-                    equipmentList[i].Picture = equ.Picture;
+                    equipmentList[i] = equ;
                 }
             }
         }
 
-        public void DeleteData(Equipment equ)
+        public void DeleteData(int Index)
         {
             for (int i = 0; i < equipmentList.Count(); i++)
             {
-                if (equipmentList[i] == equ)
+                if (equipmentList[i].Index == Index)
                 {
-                    equipmentList.Remove(equipmentList[i]);
+                    equipmentList.RemoveAt(i);
                 }
             }
         }
 
-   
+        public void AddData(Equipment equ)
+        {
+            equipmentList.Add(equ);
+        }
+
     }
 }

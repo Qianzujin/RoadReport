@@ -10,16 +10,43 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="50">
+            <RowDefinition Height="80">
             </RowDefinition>
             <RowDefinition Height="*">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <DataGrid Name="equipmentDataGrid" Grid.Row="1" Width="880" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding EquipmentView}">
+        <Grid Grid.Row="0">
+            
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Content="仪器名称"></Label>
+                    <ComboBox  Name="equName" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="equNameKeyUp">
+                    </ComboBox>
+                </StackPanel>
+
+                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Content="仪器编号"></Label>
+                    <ComboBox Name="equCode" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="equCodeKeyUp">
+                    </ComboBox>
+                </StackPanel>
+                <!--
+                     <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                     <Label Content="仪器有效期"></Label>
+                     <ComboBox Name="equDate" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="equDateKeyUp">
+                     </ComboBox>
+                     </StackPanel>
+                -->
+                <Button Margin="30 0 0 0" Click="SelectEquInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
+                <Button Margin="20 0 0 0" Click="AddEquInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
+
+            </StackPanel>
+
+        </Grid>
+        <DataGrid Name="equipmentDataGrid" Grid.Row="1" Width="880" Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding EquipmentView }">
             <DataGrid.Columns>
-                <DataGridTextColumn  IsReadOnly="True" Width="145" Header="仪器名称" Binding="{Binding Name,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn IsReadOnly="True" Width="145"  Header="仪器编号" Binding="{Binding Code,Mode=TwoWay}"></DataGridTextColumn>
-                <DataGridTextColumn IsReadOnly="True" Width="245" Header="仪器有效期" Binding="{Binding TermOfValidity,StringFormat='yyyy年MM月dd日 HH:mm:ss' ,Mode=TwoWay}"></DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="True" Width="145" Header="仪器名称" Binding="{Binding Name }"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Width="145"  Header="仪器编号" Binding="{Binding Code}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Width="245" Header="仪器有效期" Binding="{Binding TermOfValidity,StringFormat='yyyy年MM月dd日 HH:mm:ss' }"></DataGridTextColumn>
                 <!-- <DataGridTextColumn Width="180"  Header="仪器图片" Binding="{Binding Picture}"></DataGridTextColumn>-->
                 <DataGridTemplateColumn Width="180" Header="仪器图片">
                     <DataGridTemplateColumn.CellTemplate>
@@ -33,8 +60,8 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                                <Button  Style="{StaticResource EditButton}" Click="EditClick" Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
-                                <Button Command="{Binding  RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:EquipmentInfoPage}},Path=DataContext.SelectedCommand,Mode=TwoWay}"   Style="{StaticResource DeleteButton}"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
+                                <Button  Style="{StaticResource ButtonNormal}" Click="EditClick" Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
+                                <Button Command="{Binding  RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:EquipmentInfoPage}},Path=DataContext.DeleteCommand,Mode=TwoWay}" CommandParameter="{Binding Index}"   Style="{StaticResource DeleteButton}"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>

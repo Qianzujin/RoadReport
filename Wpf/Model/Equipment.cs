@@ -14,5 +14,6 @@ namespace Wpf.Model
         public string Code { get; set; }
         public DateTime TermOfValidity { get; set; }
         public BitmapImage Picture { get; set; } 
+        public bool IsChecked { get; set; }
     } 
 }

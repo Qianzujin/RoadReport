@@ -23,37 +23,87 @@ namespace Wpf
     public partial class EquipmentInfoPage : Page
     {
         EquipmentViewModel equipmentViewModel = new EquipmentViewModel();
+
         public EquipmentInfoPage()
         {
-           
             InitializeComponent();
-            this.DataContext = equipmentViewModel;            
-        }
-
-        public void Refresh()
-        {
             this.DataContext = equipmentViewModel;
-            var t = equipmentViewModel;
-            MessageBox.Show("d");
         }
 
+        //编辑仪器数据
         private void EditClick(object sender, RoutedEventArgs e)
         {
             //获取当前数据传给修改窗口
-            var equ = (Equipment)this.equipmentDataGrid.SelectedItem; 
-            EquipmentWindow equipmentWindow = new EquipmentWindow(equ);
+            Equipment equ = this.equipmentDataGrid.SelectedItem as Equipment;
+            equ.IsChecked = true;
+
+            EquipmentWindow equipmentWindow = new EquipmentWindow(equipmentViewModel, "update");
             equipmentWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            equipmentWindow.ShowDialog();       
+            equipmentWindow.Show();
         }
 
-        private void DeleteClick(object sender, RoutedEventArgs e)
+        //触发combobox按键事件，填充下拉列表数据为仪器名称数据
+        private void equNameKeyUp(object sender, KeyEventArgs e)
         {
-            var equ = (Equipment)this.equipmentDataGrid.SelectedItem;
-            equipmentViewModel.DeleteData(equ);
+            var namelist = equipmentViewModel.EquipmentView.Select(t => t.Name).ToList();
+            filterKeyUp(this.equName, namelist);
+        }
 
-           //BindingExpression binding = this.equipmentDataGrid.GetBindingExpression(DataGrid.DataContextProperty);
-           //binding.UpdateSource();
+        //仪器编号筛选
+        private void equCodeKeyUp(object sender, KeyEventArgs e)
+        {
+            var codeList = equipmentViewModel.EquipmentView.Select(t => t.Code).ToList();
+            filterKeyUp(this.equCode, codeList);
+        }
 
+        /*暂时不做时间筛选
+        private void equDateKeyUp(object sender, KeyEventArgs e)
+        {
+            var dateList = equipmentViewModel.EquipmentView.Select(t => t.TermOfValidity.ToString()).ToList();
+            filterKeyUp(this.equCode, dateList);
+        }
+        */
+
+        //筛选通用方法
+        private void filterKeyUp(ComboBox itemCombobox, List<string> itemList)
+        {
+            List<string> sourcesList = new List<string>();
+
+            foreach (var item in itemList)
+            {
+                if (item.Contains(itemCombobox.Text.Trim()) ||
+                    item.Contains(itemCombobox.Text.ToLower()) ||
+                    item.Contains(itemCombobox.Text.ToUpper()))
+                {
+                    sourcesList.Add(item);
+                }
+            }
+
+            itemCombobox.ItemsSource = sourcesList;
+            itemCombobox.IsDropDownOpen = true;
+        }
+
+        //查询仪器信息
+        private void SelectEquInfo(object sender, RoutedEventArgs e)
+        {
+            //触发Command更新数据，必须使用同一个视图数据模型
+            List<string> filterList = new List<string>();
+            filterList.Add(this.equName.Text);
+            filterList.Add(this.equCode.Text);
+            var MyVM = equipmentViewModel;
+            if (MyVM != null && MyVM.SelectCommand.CanExecute(filterList))
+                MyVM.SelectCommand.Execute(filterList);
+        }
+
+        private void AddEquInfo(object sender, RoutedEventArgs e)
+        {
+            //获取当前数据传给修改窗口
+            //Equipment equ = this.equipmentDataGrid.SelectedItem as Equipment;
+            //equ.IsChecked = true;
+
+            EquipmentWindow equipmentWindow = new EquipmentWindow(equipmentViewModel,"add");
+            equipmentWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            equipmentWindow.Show();
         }
     }
 }
