@@ -6,7 +6,14 @@
         xmlns:local="clr-namespace:Wpf"
         mc:Ignorable="d"
         Title="MainWindow" Height="680" Width="1080" WindowStyle="None"
-        AllowsTransparency="True" ResizeMode="CanResizeWithGrip">
+        AllowsTransparency="True" ResizeMode="CanResizeWithGrip"
+         BorderThickness="24">
+
+    
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="24" Color="#FF858484" Direction="90" ShadowDepth="3"/>
+    </Window.Effect>
+  
     <Grid>
         <!--上下分行-->
         <Grid.RowDefinitions>

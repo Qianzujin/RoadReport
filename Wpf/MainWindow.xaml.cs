@@ -30,6 +30,7 @@ namespace Wpf
 
         public MainWindow()
         {
+
             InitializeComponent();
             this.MouseLeftButtonDown += (render, e) =>
             {
