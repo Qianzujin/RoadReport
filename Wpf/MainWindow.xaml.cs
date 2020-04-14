@@ -30,6 +30,14 @@ namespace Wpf
 
         public MainWindow()
         {
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            loginWindow.ShowDialog();
+            if (loginWindow.isLogin == false)
+            {
+                MessageBox.Show("登陆失败！");
+                Application.Current.Shutdown();
+            }
 
             InitializeComponent();
             this.MouseLeftButtonDown += (render, e) =>

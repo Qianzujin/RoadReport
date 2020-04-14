@@ -1,0 +1,42 @@
+﻿<Window x:Class="Wpf.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Wpf"
+        mc:Ignorable="d"
+        Height="260" Width="355" 
+        BorderThickness="24"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Title="LoginWindow" >
+    <Window.Effect>
+        <DropShadowEffect BlurRadius="24" Color="#FF858484" Direction="90" ShadowDepth="3"/>
+    </Window.Effect>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#5BBAFA">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Image Width="60" Height="50" Source="./Resources/Tire.png"></Image>
+                <TextBlock Margin="10" FontWeight="Black" Text="路试报告工具"></TextBlock>
+            </StackPanel>
+        </Grid>
+        <Grid Grid.Row="1">
+            <StackPanel Margin="5">
+                <WrapPanel HorizontalAlignment="Center">
+                    <Label VerticalAlignment="Center" Content="用户名"></Label>
+                    <TextBox Margin="5" Width="100" Height="25"></TextBox>
+                </WrapPanel>
+                
+                <WrapPanel HorizontalAlignment="Center">
+                    <Label VerticalAlignment="Center" Content="密码"></Label>
+                    <TextBox Margin="15 5 5 5" Width="100" Height="25"></TextBox>
+                </WrapPanel>
+                <Button Click="Login" Margin="3" Width="143" Content="登陆" Foreground="White" Background="#5BBAFA" Height="25"></Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
