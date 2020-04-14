@@ -22,7 +22,7 @@ namespace Wpf.ViewModel
         //视图模型构造函数
         public EquipmentViewModel()
         {
-            SelectAllEquipment();
+            equipmentViewList = equipmentDao.SelectAll();
             UpdateViewData();
             DeleteCommand = new RelayCommand<int>(Index => Delete(Index));
             UpdateCommand = new RelayCommand<Equipment>(equ => Update(equ));
@@ -45,7 +45,7 @@ namespace Wpf.ViewModel
         public void SelectAllEquipment()
         {
             equipmentViewList.Clear();
-            equipmentViewList = equipmentDao.SelectAllEquipment();
+            equipmentViewList = equipmentDao.SelectAll(); 
         }
 
         //视图对象
@@ -55,15 +55,9 @@ namespace Wpf.ViewModel
             set { equipmentView = value; RaisePropertyChanged(); }
         }
 
-        //暂时用不到
-        public void SubmitData(Equipment equ)
-        {
-            equipmentDao.UpdateData(equ);
-        }
-
         // Commandes
 
-        // 删除命令
+        // 操作命令
         public RelayCommand<int> DeleteCommand { get; set; }
         public RelayCommand<Equipment> UpdateCommand { get; set; }
         public RelayCommand<List<string>> SelectCommand { get; set; }
@@ -75,11 +69,11 @@ namespace Wpf.ViewModel
            for (int i = 0; i < equipmentViewList.Count(); i++)
            {
                if (equipmentViewList[i].Index == Index)
-               {
-                   equipmentViewList.RemoveAt(i);
-                    equipmentDao.DeleteData(Index);
-               }
+               {                  
+                   equipmentDao.Delete(Index);
+                }
            }
+            SelectAllEquipment();
             UpdateViewData();
         }
 
@@ -89,22 +83,19 @@ namespace Wpf.ViewModel
             {
                 if (equipmentViewList[i].Index == equ.Index)
                 {
-                    equipmentViewList[i] = equ;
-                    //equipmentDao.UpdateData(equ);
                     equipmentDao.Update(equ);
                 }
             }
+            SelectAllEquipment();
             UpdateViewData();
         }
 
         private void Add(Equipment equ) 
         {
-            //equipmentViewList.Add(equ);
-            equipmentDao.AddData(equ);          
+            equipmentDao.Insert(equ);
+            SelectAllEquipment();
             UpdateViewData();
-
         }
-
 
         private void Select(List<string> filterList)
         {

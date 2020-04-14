@@ -22,7 +22,6 @@ namespace Wpf.Dao
         {
             //创建客户端
             CreateClient();
-            SelectAll();
         }
 
         private void CreateTable()
@@ -37,7 +36,7 @@ namespace Wpf.Dao
         }
 
         //查询所有数据
-        private void SelectAll()
+        public List<Equipment> SelectAll()
         {
             var reader = db.ReadFullTable("EquipmentInfo");
             while (reader.Read())
@@ -49,24 +48,41 @@ namespace Wpf.Dao
                     Name = Convert.ToString(reader["Name"]),
                     Code = Convert.ToString(reader["Code"]),
                     TermOfValidity = Convert.ToDateTime(reader["TermOfValidity"]),
-                    Picture = new BitmapImage(new Uri(Convert.ToString(reader["Picture"]), UriKind.Relative))
+                    Picture = new BitmapImage(new Uri(Convert.ToString(reader["Picture"]), UriKind.RelativeOrAbsolute))
                 });
             }
+            return equipmentList;
         }
 
         //插入   注意：时间插入时需要equ.TermOfValidity.ToString("s")后面加s
-        private void Insert(Equipment equ)
+        public void Insert(Equipment equ)
         {
-            db.InsertInto("EquipmentInfo", new string[] { "Idx", "IsChecked", "Name", "Code", "TermOfValidity", "Picture" }, new string[] { equ.Index.ToString(),
-                    equ.IsChecked.ToString(), equ.Name.ToString(), equ.Code.ToString(), equ.TermOfValidity.ToString("s"), equ.Picture.ToString() });
+            db.InsertInto(
+                "EquipmentInfo",
+                new string[] { "Idx", "IsChecked", "Name", "Code", "TermOfValidity", "Picture" }, 
+                new string[] { equ.Index.ToString(), equ.IsChecked.ToString(), equ.Name.ToString(),
+                    equ.Code.ToString(), equ.TermOfValidity.ToString("s"), equ.Picture.ToString() });
         }
 
         //修改
         public void Update(Equipment equ)
         {
-            db.UpdateInto("EquipmentInfo", new string[] { "Idx", "IsChecked", "Name", "Code", "TermOfValidity", "Picture" }, new string[] { equ.Index.ToString(),
-                    equ.IsChecked.ToString(), equ.Name.ToString(), equ.Code.ToString(), equ.TermOfValidity.ToString("s"), equ.Picture.ToString() },"Idx",equ.Index.ToString());
+            db.UpdateInto(
+                "EquipmentInfo", 
+                new string[] { "Idx", "IsChecked", "Name", "Code", "TermOfValidity", "Picture" }, 
+                new string[] { equ.Index.ToString(),equ.IsChecked.ToString(), equ.Name.ToString(),
+                    equ.Code.ToString(), equ.TermOfValidity.ToString("s"), equ.Picture.ToString() },"Idx",equ.Index.ToString());
         }
+        
+        //删除
+        public void Delete(int Index)
+        {
+            db.Delete("EquipmentInfo", new string[] { "Idx" }, new string[] { Index.ToString() });
+        }
+
+
+
+
 
         //向数据库插入100条测试数据
         private void Insert100()
@@ -82,12 +98,6 @@ namespace Wpf.Dao
                 });
             }
         }
-
-
-
-
-
-
 
         //本地查询
         public List<Equipment> SelectAllEquipment()

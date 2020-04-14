@@ -92,7 +92,7 @@ namespace Wpf
                 }
                 else
                 {
-                    File.Copy(fileDialog.FileName, path, true);
+                    File.Copy(fileDialog.FileName, path);
                 }
                 this.img.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
                 //this.img.Source = new BitmapImage(new Uri(@"/Wpf;component/Resources/Picture/" + System.IO.Path.GetFileName(fileDialog.FileName), UriKind.Relative));
@@ -124,7 +124,15 @@ namespace Wpf
                 {
                     //增加索引值
                     var idxList = equipmentViewModelSelf.EquipmentView.Select(a => a.Index).ToList();
-                    equ.Index = idxList.Max() + 1;
+                    if (idxList.Count() == 0)
+                    {
+                        equ.Index = 1;
+                    }
+                    else
+                    {
+                        equ.Index = idxList.Max() + 1;
+                    }
+                   
                     var MyVM = equipmentViewModelSelf;
                     if (MyVM != null && MyVM.AddCommand.CanExecute(equ))
                         MyVM.AddCommand.Execute(equ);

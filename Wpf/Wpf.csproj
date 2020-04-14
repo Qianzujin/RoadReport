@@ -109,6 +109,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CarInfoPage.xaml.cs">
+      <DependentUpon>CarInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Dao\CarDao.cs" />
     <Compile Include="Dao\CoverDao.cs" />
     <Compile Include="Dao\EquipmentDao.cs" />
     <Compile Include="Dao\IndexDao.cs" />
@@ -119,13 +123,19 @@
     <Compile Include="EquipmentWindow.xaml.cs">
       <DependentUpon>EquipmentWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Car.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Index.cs" />
+    <Compile Include="ViewModel\CarViewModel.cs" />
     <Compile Include="ViewModel\CoverViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="CarInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="CoverInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

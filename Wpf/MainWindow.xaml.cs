@@ -26,6 +26,7 @@ namespace Wpf
         IndexInfoPage indexInfoPage;
         CoverInfoPage coverInfoPage;
         EquipmentInfoPage equipmentInfoPage;
+        CarInfoPage carInfoPage;
 
         public MainWindow()
         {
@@ -45,19 +46,13 @@ namespace Wpf
             menuNameList.Add(new MenuName { Index = 2, Icon = "\xe654", SheetName = "结论信息" });
             menuNameList.Add(new MenuName { Index = 3, Icon = "\xe655", SheetName = "轮胎信息" });
             menuNameList.Add(new MenuName { Index = 4, Icon = "\xe65a", SheetName = "仪器信息" });
+            menuNameList.Add(new MenuName { Index = 4, Icon = "\xe659", SheetName = "车辆信息" });
 
             this.SheetMenuListBox.ItemsSource = menuNameList;
             InitPage();
         }
 
-
-        public void InitPage()
-        {
-            indexInfoPage = new IndexInfoPage();
-            coverInfoPage = new CoverInfoPage();
-            equipmentInfoPage = new EquipmentInfoPage();
-        }
-
+        //菜单栏类
         public class MenuName
         {
             public int Index { get; set; }
@@ -65,6 +60,18 @@ namespace Wpf
             public string SheetName { get; set; }
         }
 
+
+        //初始化页面
+        public void InitPage()
+        {
+            indexInfoPage = new IndexInfoPage();
+            coverInfoPage = new CoverInfoPage();
+            equipmentInfoPage = new EquipmentInfoPage();
+            carInfoPage = new CarInfoPage();
+        }
+
+        
+        //选择操作步
         private void SelSheetMenu(object sender, SelectionChangedEventArgs e)
         {
             this.home.Visibility = Visibility.Hidden;
@@ -82,13 +89,19 @@ namespace Wpf
             {
                 this.Change_Page.NavigationService.Navigate(equipmentInfoPage);   
             }
+            else if (this.SheetMenuListBox.SelectedIndex == 5)
+            {
+                this.Change_Page.NavigationService.Navigate(carInfoPage);
+            }
         }
 
+        //结束程序
         private void Close(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
+        //最小化窗口
         private void Min(object sender, MouseButtonEventArgs e)
         {
             if (this.WindowState != WindowState.Minimized)
@@ -97,6 +110,7 @@ namespace Wpf
             }
         }
 
+        //最大化窗口
         private void Max(object sender, MouseButtonEventArgs e)
         {
             if (this.WindowState != WindowState.Maximized)
@@ -108,12 +122,14 @@ namespace Wpf
             }
         }
 
+        //主页
         private void GoHome(object sender, MouseButtonEventArgs e)
         {
             this.Change_Page.Visibility = Visibility.Hidden;
             this.home.Visibility = Visibility.Visible;
         }
 
+        //测试
         private void Message(object sender, RoutedEventArgs e)
         {
             IndexViewModel indexViewModel = new IndexViewModel();

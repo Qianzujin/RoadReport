@@ -97,7 +97,7 @@ namespace Wpf.Dao
         /// <returns></returns>
         public SQLiteDataReader InsertInto(string tableName, string[] col,string[] values)
         {
-            string query = "INSERT INTO " + tableName+" ('" + col[0]+"'";
+            string query = "INSERT INTO " + tableName+" (" + col[0];
             for (int i = 1; i < col.Length; ++i)
             {
                 query += ", " + col[i];
@@ -127,7 +127,7 @@ namespace Wpf.Dao
             string query = "UPDATE " + tableName + " SET " + cols[0] + " = " + colsvalues[0];
             for (int i = 1; i < colsvalues.Length; ++i)
             {
-                query += ", " + cols[i] + " =" + colsvalues[i];
+                query += ", " + cols[i] + " =" + "'" + colsvalues[i] + "'";
             }
             query += " WHERE " + selectkey + " = " + selectvalue + " ";
             return ExecuteQuery(query);
