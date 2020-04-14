@@ -6,6 +6,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Media.Imaging;
 using Wpf.Dao;
 using Wpf.Model;
@@ -76,9 +77,16 @@ namespace Wpf.ViewModel
         // 删除函数
         private void Delete(int Index)
         {
-            carDao.Delete(Index);
-            SelectAll();
-            UpdateViewData();
+            OKWindow okWindow = new OKWindow("删除数据","确实要删除这条数据吗？");
+            okWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            okWindow.ShowDialog();
+            if (okWindow.Ret == true)
+            {
+                carDao.Delete(Index);
+                SelectAll();
+                UpdateViewData();
+            }
+         
         }
 
         public void Update(Car car)

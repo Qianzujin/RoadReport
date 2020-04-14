@@ -166,10 +166,17 @@ namespace Wpf
                         //修改索引值
                         car.Index = this.car.Index;
                         var MyVM = carViewModelSelf;
-                        if (MyVM != null && MyVM.UpdateCommand.CanExecute(car))
+
+                        OKWindow okWindow = new OKWindow("修改数据", "确实要修改这条数据吗？");
+                        okWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                        okWindow.ShowDialog();
+                        if (okWindow.Ret == true)
                         {
-                            MyVM.UpdateCommand.Execute(car);
-                            this.Close();
+                            if (MyVM != null && MyVM.UpdateCommand.CanExecute(car))
+                            {
+                                MyVM.UpdateCommand.Execute(car);
+                                this.Close();
+                            }
                         }
                     }
                     else

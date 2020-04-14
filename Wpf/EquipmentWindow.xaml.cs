@@ -141,9 +141,16 @@ namespace Wpf
                 {
                     //修改索引值
                     equ.Index = this.equ.Index;
-                    var MyVM = equipmentViewModelSelf;
-                    if (MyVM != null && MyVM.UpdateCommand.CanExecute(equ))
-                        MyVM.UpdateCommand.Execute(equ);
+
+                    OKWindow okWindow = new OKWindow("修改数据", "确实要修改这条数据吗？");
+                    okWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                    okWindow.ShowDialog();
+                    if (okWindow.Ret == true)
+                    {
+                        var MyVM = equipmentViewModelSelf;
+                        if (MyVM != null && MyVM.UpdateCommand.CanExecute(equ))
+                            MyVM.UpdateCommand.Execute(equ);
+                    }
                 }
                 else
                 {
