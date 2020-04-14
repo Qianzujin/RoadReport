@@ -51,7 +51,9 @@ namespace Wpf
 
         private void AddCarInfo(object sender, RoutedEventArgs e)
         {
-
+            CarInfoWindow carWindow = new CarInfoWindow();
+            carWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            carWindow.Show();
         }
     }
 }

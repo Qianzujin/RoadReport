@@ -95,6 +95,7 @@ namespace Wpf
                 MyVM.SelectCommand.Execute(filterList);
         }
 
+        //新增信息
         private void AddEquInfo(object sender, RoutedEventArgs e)
         {
             //获取当前数据传给修改窗口

@@ -112,6 +112,9 @@
     <Compile Include="CarInfoPage.xaml.cs">
       <DependentUpon>CarInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CarInfoWindow.xaml.cs">
+      <DependentUpon>CarInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Dao\CarDao.cs" />
     <Compile Include="Dao\CoverDao.cs" />
     <Compile Include="Dao\EquipmentDao.cs" />
@@ -133,6 +136,10 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="CarInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CarInfoWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
