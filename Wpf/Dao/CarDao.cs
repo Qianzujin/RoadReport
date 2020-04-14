@@ -14,15 +14,16 @@ namespace Wpf.Dao
         List<Car> carList = new List<Car>();
         SqliteDbHelper db;//声明连接对象
 
+        //建表语句
         private void CreateTable()
         {
             db.CreateTable("CarInfo",
                 new string[] {
-               "Idx" ,"Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated", "Displacement",
+               "Idx" ,"IsChecked","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated", "Displacement",
                     "FrontSuspensionSystem","RearSuspensionSystem","DriveMethod","Gearbox",
                     "Brake","BuyingTime","InitialOdometerReading","Picture"
             },
-            new string[] {"INT","TEXT","TEXT","INT","DOUBLE","DOUBLE","DOUBLE","TEXT","TEXT",
+            new string[] {"INT","BOOLEAN","TEXT","TEXT","INT","DOUBLE","DOUBLE","DOUBLE","TEXT","TEXT",
             "TEXT","TEXT","TEXT","DATETIME","INT", "TEXT"
             });
         }
@@ -36,17 +37,21 @@ namespace Wpf.Dao
         public CarDao()
         {
             CreateClient();
+           // CreateTable();
         }
 
         //查询所有数据
         public List<Car> SelectAll()
         {
+            carList.Clear();
             var reader = db.ReadFullTable("CarInfo");
             while (reader.Read())
             {
+ 
                 carList.Add(new Car
                 {
                     Index = Convert.ToInt16(reader["Idx"]),
+                    IsChecked = Convert.ToBoolean(reader["IsChecked"]),
                     Type = Convert.ToString(reader["Type"]),
                     CarNumber = Convert.ToString(reader["CarNumber"]),
                     SeatNum = Convert.ToInt16(reader["SeatNum"]),
@@ -58,10 +63,11 @@ namespace Wpf.Dao
                     DriveMethod = Convert.ToString(reader["DriveMethod"]),
                     Gearbox = Convert.ToString(reader["Gearbox"]),
                     Brake = Convert.ToString(reader["Brake"]),
-                    BuyingTime = Convert.ToDateTime(reader["Brake"]),
+                    BuyingTime = Convert.ToDateTime(reader["BuyingTime"]),
                     InitialOdometerReading = Convert.ToInt16(reader["InitialOdometerReading"]),
                     Picture = new BitmapImage(new Uri(Convert.ToString(reader["Picture"]), UriKind.RelativeOrAbsolute))
                 });
+                
             }
             return carList;
         }
@@ -71,10 +77,10 @@ namespace Wpf.Dao
         {
             db.InsertInto(
                 "CarInfo",
-                new string[] { "Idx","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated",
+                new string[] { "Idx","IsChecked","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated",
                     "Displacement","FrontSuspensionSystem","RearSuspensionSystem","DriveMethod",
                     "Gearbox","Brake","BuyingTime","InitialOdometerReading","Picture" },
-                new string[] { car.Index.ToString(),car.Type.ToString(),car.CarNumber.ToString(),
+                new string[] { car.Index.ToString(),car.IsChecked.ToString(),car.Type.ToString(),car.CarNumber.ToString(),
                 car.SeatNum.ToString(), car.CurbWeight.ToString(),car.FullRated.ToString(),car.Displacement.ToString(),
                 car.FrontSuspensionSystem.ToString(),car.RearSuspensionSystem.ToString(),
                 car.DriveMethod.ToString(),car.Gearbox.ToString(),car.Brake.ToString(),
@@ -87,10 +93,10 @@ namespace Wpf.Dao
         {
             db.UpdateInto(
                 "CarInfo",
-                new string[] { "Idx","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated",
+                new string[] { "Idx","IsChecked","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated",
                     "Displacement","FrontSuspensionSystem","RearSuspensionSystem","DriveMethod",
                     "Gearbox","Brake","BuyingTime","InitialOdometerReading","Picture" },
-                new string[] { car.Index.ToString(),car.Type.ToString(),car.CarNumber.ToString(),
+                new string[] { car.Index.ToString(),car.IsChecked.ToString(),car.Type.ToString(),car.CarNumber.ToString(),
                 car.SeatNum.ToString(), car.CurbWeight.ToString(),car.FullRated.ToString(),car.Displacement.ToString(),
                 car.FrontSuspensionSystem.ToString(),car.RearSuspensionSystem.ToString(),
                 car.DriveMethod.ToString(),car.Gearbox.ToString(),car.Brake.ToString(),

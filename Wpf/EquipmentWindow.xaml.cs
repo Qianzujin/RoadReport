@@ -30,6 +30,7 @@ namespace Wpf
         //操作标志
         string operationFlag;
 
+        //有参构造
         public EquipmentWindow(EquipmentViewModel equipmentViewModel, string OperationFlag)
         {
             InitializeComponent();
@@ -115,11 +116,10 @@ namespace Wpf
                     Code = this.codeTxtBox.Text,
                     Picture = this.img.Source as BitmapImage,
                     IsChecked = false,
-                    TermOfValidity = Convert.ToDateTime(this.datePicker.Text)
+                    TermOfValidity = Convert.ToDateTime(this.datePicker.Text.Trim())
                 };
 
                 //触发Command更新数据，必须使用同一个视图数据模型
-
                 if (this.operationFlag == "add")
                 {
                     //增加索引值
@@ -134,8 +134,8 @@ namespace Wpf
                     }
                    
                     var MyVM = equipmentViewModelSelf;
-                    if (MyVM != null && MyVM.AddCommand.CanExecute(equ))
-                        MyVM.AddCommand.Execute(equ);
+                    if (MyVM != null && MyVM.InsertCommand.CanExecute(equ))
+                        MyVM.InsertCommand.Execute(equ);
                 }
                 else if (this.operationFlag == "update")
                 {
@@ -153,7 +153,7 @@ namespace Wpf
             }
             else
             {
-                MessageBox.Show("信息不完整！");
+                MessageBox.Show("请检查数据格式是否正确！");
             }
             this.Close();
         }

@@ -27,7 +27,7 @@ namespace Wpf.ViewModel
             DeleteCommand = new RelayCommand<int>(Index => Delete(Index));
             UpdateCommand = new RelayCommand<Equipment>(equ => Update(equ));
             SelectCommand = new RelayCommand<List<string>>(filterList => Select(filterList));
-            AddCommand = new RelayCommand<Equipment>(equ => Add(equ));
+            InsertCommand = new RelayCommand<Equipment>(equ => Insert(equ));
 
         }
 
@@ -61,7 +61,7 @@ namespace Wpf.ViewModel
         public RelayCommand<int> DeleteCommand { get; set; }
         public RelayCommand<Equipment> UpdateCommand { get; set; }
         public RelayCommand<List<string>> SelectCommand { get; set; }
-        public RelayCommand<Equipment> AddCommand { get; set; }
+        public RelayCommand<Equipment> InsertCommand { get; set; }
 
         // 删除函数
         private void Delete(int Index) 
@@ -90,7 +90,7 @@ namespace Wpf.ViewModel
             UpdateViewData();
         }
 
-        private void Add(Equipment equ) 
+        private void Insert(Equipment equ)  
         {
             equipmentDao.Insert(equ);
             SelectAllEquipment();

@@ -38,6 +38,7 @@ namespace Wpf.Dao
         //查询所有数据
         public List<Equipment> SelectAll()
         {
+            equipmentList.Clear();
             var reader = db.ReadFullTable("EquipmentInfo");
             while (reader.Read())
             {

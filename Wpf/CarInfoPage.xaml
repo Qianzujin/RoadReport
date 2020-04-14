@@ -20,13 +20,13 @@
             <StackPanel Orientation="Horizontal">
                 <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="车型"></Label>
-                    <ComboBox  Name="carType" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="carNameKeyUp">
+                    <ComboBox  Name="carType" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="carTypeKeyUp">
                     </ComboBox>
                 </StackPanel>
 
                 <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="车辆号牌"></Label>
-                    <ComboBox Name="carNumber" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="carCodeKeyUp">
+                    <ComboBox Name="carNumber" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="carNumberKeyUp">
                     </ComboBox>
                 </StackPanel>
                 <!--
@@ -44,8 +44,8 @@
         </Grid>
         <DataGrid Name="carDataGrid" Grid.Row="1" Margin="30"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding CarView }">
             <DataGrid.Columns>
-                <DataGridTextColumn  IsReadOnly="True" Width="*" Header="车型" Binding="{Binding Name }"></DataGridTextColumn>
-                <DataGridTextColumn IsReadOnly="True" Width="*"  Header="车辆号牌" Binding="{Binding Code}"></DataGridTextColumn>
+                <DataGridTextColumn  IsReadOnly="True" Width="*" Header="车型" Binding="{Binding Type }"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Width="*"  Header="车辆号牌" Binding="{Binding CarNumber}"></DataGridTextColumn>
                 <DataGridTemplateColumn Width="*" Header="车辆图片">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
