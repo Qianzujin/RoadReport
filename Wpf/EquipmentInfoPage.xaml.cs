@@ -19,6 +19,7 @@ namespace Wpf
 {
     /// <summary>
     /// EquipmentInfoPage.xaml 的交互逻辑
+    /// 仪器信息操作窗口
     /// </summary>
     public partial class EquipmentInfoPage : Page
     {

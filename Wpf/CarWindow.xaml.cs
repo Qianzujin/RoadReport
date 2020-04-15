@@ -19,15 +19,16 @@ using Wpf.ViewModel;
 namespace Wpf
 {
     /// <summary>
-    /// CarInfoWindow.xaml 的交互逻辑
+    /// CarWindow.xaml 的交互逻辑
+    /// 车辆信息录入窗口
     /// </summary>
-    public partial class CarWindow : Window 
+    public partial class CarWindow : Window
     {
         CarViewModel carViewModelSelf = new CarViewModel();
         string operationFlag;
         Car car;
 
-        public CarWindow(CarViewModel carViewModel,string  OperationFlag) 
+        public CarWindow(CarViewModel carViewModel, string OperationFlag)
         {
             InitializeComponent();
             this.MouseLeftButtonDown += (sender, e) =>
@@ -119,7 +120,8 @@ namespace Wpf
                 this.carPicture.Source.ToString() != ""
                 ))
             {
-                try {
+                try
+                {
                     Car car = new Car
                     {
                         Index = 0,
@@ -184,13 +186,15 @@ namespace Wpf
                         MessageBox.Show("有一点小问题！");
                     }
                 }
-                catch {
+                catch
+                {
                     MessageBox.Show("录入失败,请检查数据格式是否有误,请重新录入！");
                     this.Close();
                 }
-              
+
             }
-            else {
+            else
+            {
                 MessageBox.Show("录入失败,请检查数据格式是否有误,请重新录入！");
             }
         }

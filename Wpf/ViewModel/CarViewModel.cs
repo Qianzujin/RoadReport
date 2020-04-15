@@ -38,25 +38,7 @@ namespace Wpf.ViewModel
             carView.Clear();
             for (int i = 0; i < carViewList.Count(); i++)
             {
-                carView.Add(new Car
-                {
-                    Index = carViewList[i].Index,
-                    IsChecked = carViewList[i].IsChecked,
-                    Type = carViewList[i].Type,
-                    CarNumber = carViewList[i].CarNumber,
-                    SeatNum = carViewList[i].SeatNum,
-                    Brake = carViewList[i].Brake,
-                    BuyingTime = carViewList[i].BuyingTime,
-                    CurbWeight = carViewList[i].CurbWeight,
-                    Displacement = carViewList[i].Displacement,
-                    DriveMethod = carViewList[i].DriveMethod,
-                    FrontSuspensionSystem = carViewList[i].FrontSuspensionSystem,
-                    FullRated = carViewList[i].FullRated,
-                    Gearbox = carViewList[i].Gearbox,
-                    InitialOdometerReading = carViewList[i].InitialOdometerReading,
-                    RearSuspensionSystem = carViewList[i].RearSuspensionSystem,
-                    Picture = carViewList[i].Picture,
-                });
+                carView.Add(carViewList[i]);
             }
         }
 

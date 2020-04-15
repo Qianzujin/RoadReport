@@ -1,0 +1,58 @@
+﻿<Page x:Class="Wpf.TestRouteInfoPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Wpf"
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="TestRouteInfoPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80">
+            </RowDefinition>
+            <RowDefinition Height="*">
+            </RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+
+            <StackPanel Orientation="Horizontal">
+                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                    <Label Content="试验路线"></Label>
+                    <ComboBox  Name="carType" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" >
+                    </ComboBox>
+                </StackPanel>
+
+                <Button Margin="30 0 0 0" Click="SelectTestRouteInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
+                <Button Margin="20 0 0 0" Click="AddTestRouteInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
+
+            </StackPanel>
+
+        </Grid>
+        <DataGrid Name="testRouteDataGrid" Grid.Row="1" Margin="30"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding TestRouteBaseView }">
+            <DataGrid.Columns>
+                <DataGridTextColumn  IsReadOnly="True" Width="*" Header="试验路线" Binding="{Binding TestRoutes}"></DataGridTextColumn>
+                <DataGridTextColumn IsReadOnly="True" Width="*"  Header="试验里程" Binding="{Binding LineMileage }"></DataGridTextColumn>
+                <DataGridTemplateColumn Width="*" Header="试验路线图">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="{Binding  Picture}"></Image>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Width="*"  Header="操作">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
+                                <Button  Style="{StaticResource ButtonNormal}" Click="EditClick" Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
+                                <Button Command="{Binding  RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:TestRouteInfoPage}},Path=DataContext.DeleteCommand,Mode=TwoWay}" CommandParameter="{Binding Index}"   Style="{StaticResource DeleteButton}"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

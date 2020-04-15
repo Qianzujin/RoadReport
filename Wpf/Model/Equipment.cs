@@ -9,11 +9,11 @@ namespace Wpf.Model
 {
     public class Equipment
     {
-        public int Index { get; set; }
-        public string Name { get; set; }
-        public string Code { get; set; }
-        public DateTime TermOfValidity { get; set; }
-        public BitmapImage Picture { get; set; } 
-        public bool IsChecked { get; set; }
+        public int Index { get; set; }//索引
+        public string Name { get; set; }//仪器名称
+        public string Code { get; set; }//仪器编号
+        public DateTime TermOfValidity { get; set; }//仪器有效期
+        public BitmapImage Picture { get; set; } //仪器图片
+        public bool IsChecked { get; set; }//是否选中
     } 
 }

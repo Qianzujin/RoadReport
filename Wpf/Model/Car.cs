@@ -9,8 +9,8 @@ namespace Wpf.Model
 {
     public class Car
     {
-        public int Index { get; set; }
-        public bool IsChecked { get; set; } 
+        public int Index { get; set; }//索引
+        public bool IsChecked { get; set; } //是否选中
         public string Type { get; set; }//车型
         public string CarNumber { get; set; }//车牌
         public int SeatNum { get; set; }//座位数

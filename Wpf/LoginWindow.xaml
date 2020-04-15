@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Wpf"
         mc:Ignorable="d"
-        Height="260" Width="355" 
+        Height="290" Width="355" 
         BorderThickness="24"
         AllowsTransparency="True"
         WindowStyle="None"
@@ -25,17 +25,17 @@
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
-            <StackPanel Margin="5">
+            <StackPanel Margin="10">
                 <WrapPanel HorizontalAlignment="Center">
                     <Label VerticalAlignment="Center" Content="用户名"></Label>
-                    <TextBox Margin="5" Width="100" Height="25"></TextBox>
+                    <TextBox FontSize="16" Margin="8" Width="140" Height="25"></TextBox>
                 </WrapPanel>
                 
                 <WrapPanel HorizontalAlignment="Center">
                     <Label VerticalAlignment="Center" Content="密码"></Label>
-                    <TextBox Margin="15 5 5 5" Width="100" Height="25"></TextBox>
+                    <PasswordBox   FontSize="16" Margin="15 8 8 8" Width="140" Height="25"></PasswordBox>
                 </WrapPanel>
-                <Button Click="Login" Margin="3" Width="143" Content="登陆" Foreground="White" Background="#5BBAFA" Height="25"></Button>
+                <Button Click="Login" Margin="8" Width="183" Content="登陆" Foreground="White" Background="#5BBAFA" Height="25"></Button>
             </StackPanel>
         </Grid>
     </Grid>

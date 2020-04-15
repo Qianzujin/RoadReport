@@ -16,6 +16,7 @@ namespace Wpf
 {
     /// <summary>
     /// LoginWindow.xaml 的交互逻辑
+    /// 登陆窗口
     /// </summary>
     public partial class LoginWindow : Window
     {

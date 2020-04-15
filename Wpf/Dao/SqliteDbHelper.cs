@@ -132,6 +132,32 @@ namespace Wpf.Dao
             query += " WHERE " + selectkey + " = " + selectvalue + " ";
             return ExecuteQuery(query);
         }
+
+        /// <summary>
+        /// 动态更新表结构
+        /// </summary>
+        /// <param name="tableName">表名</param>
+        /// <param name="cols">字段集</param>
+        /// <param name="colsvalues">对于集合值</param>
+        /// <param name="selectkey">要查询的字段</param>
+        /// <param name="selectvalue">要查询的字段值</param>
+        /// <returns></returns>
+        public SQLiteDataReader Update(string tableName, string[] cols, 
+          string[] colsvalues, string[] selectkey, string[] selectvalue)
+        {
+            string query = "UPDATE " + tableName + " SET " + cols[0] + " = " + colsvalues[0];
+            for (int i = 1; i < colsvalues.Length; ++i)
+            {
+                query += ", " + cols[i] + " =" + "'" + colsvalues[i] + "'";
+            }
+            query += " WHERE " + selectkey[0] + " = " + selectvalue[0] + " ";
+
+            for (int i = 1; i < colsvalues.Length; ++i)
+            {
+                query += " and " + selectkey[i] + " = " + selectvalue[i];
+            }
+            return ExecuteQuery(query);
+        }
         /// <summary>
         /// 动态删除指定表字段数据
         /// </summary>

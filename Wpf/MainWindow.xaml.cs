@@ -27,17 +27,20 @@ namespace Wpf
         CoverInfoPage coverInfoPage;
         EquipmentInfoPage equipmentInfoPage;
         CarInfoPage carInfoPage;
+        TestRouteInfoPage testRouteInfoPage;
+
+
 
         public MainWindow()
         {
-            LoginWindow loginWindow = new LoginWindow();
-            loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            loginWindow.ShowDialog();
-            if (loginWindow.isLogin == false)
-            {
-                MessageBox.Show("登陆失败！");
-                Application.Current.Shutdown();
-            }
+            //LoginWindow loginWindow = new LoginWindow();
+            //loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //loginWindow.ShowDialog();
+            //if (loginWindow.isLogin == false)
+            //{
+            //    MessageBox.Show("登陆失败！");
+            //    Application.Current.Shutdown();
+            //}
 
             InitializeComponent();
             this.MouseLeftButtonDown += (render, e) =>
@@ -55,7 +58,8 @@ namespace Wpf
             menuNameList.Add(new MenuName { Index = 2, Icon = "\xe654", SheetName = "结论信息" });
             menuNameList.Add(new MenuName { Index = 3, Icon = "\xe655", SheetName = "轮胎信息" });
             menuNameList.Add(new MenuName { Index = 4, Icon = "\xe65a", SheetName = "仪器信息" });
-            menuNameList.Add(new MenuName { Index = 4, Icon = "\xe659", SheetName = "车辆信息" });
+            menuNameList.Add(new MenuName { Index = 5, Icon = "\xe659", SheetName = "车辆信息" });
+            menuNameList.Add(new MenuName { Index = 6, Icon = "\xe659", SheetName = "路线信息" });
 
             this.SheetMenuListBox.ItemsSource = menuNameList;
             InitPage();
@@ -77,9 +81,10 @@ namespace Wpf
             coverInfoPage = new CoverInfoPage();
             equipmentInfoPage = new EquipmentInfoPage();
             carInfoPage = new CarInfoPage();
+            testRouteInfoPage = new TestRouteInfoPage();
         }
 
-        
+
         //选择操作步
         private void SelSheetMenu(object sender, SelectionChangedEventArgs e)
         {
@@ -101,6 +106,10 @@ namespace Wpf
             else if (this.SheetMenuListBox.SelectedIndex == 5)
             {
                 this.Change_Page.NavigationService.Navigate(carInfoPage);
+            }
+            else if (this.SheetMenuListBox.SelectedIndex == 6)
+            {
+                this.Change_Page.NavigationService.Navigate(testRouteInfoPage);
             }
         }
 

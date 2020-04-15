@@ -20,6 +20,7 @@ namespace Wpf
 {
     /// <summary>
     /// EquipmentWindow.xaml 的交互逻辑
+    /// 仪器信息录入窗口
     /// </summary>
     public partial class EquipmentWindow : Window
     {

@@ -29,13 +29,7 @@
                     <ComboBox Name="carNumber" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="carNumberKeyUp">
                     </ComboBox>
                 </StackPanel>
-                <!--
-                     <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
-                     <Label Content="仪器有效期"></Label>
-                     <ComboBox Name="equDate" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="equDateKeyUp">
-                     </ComboBox>
-                     </StackPanel>
-                -->
+          
                 <Button Margin="30 0 0 0" Click="SelectCarInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
                 <Button Margin="20 0 0 0" Click="AddCarInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
 

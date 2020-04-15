@@ -19,10 +19,11 @@ namespace Wpf
 {
     /// <summary>
     /// CarInfoPage.xaml 的交互逻辑
+    /// 车辆信息操作窗口
     /// </summary>
     public partial class CarInfoPage : Page
     {
-        CarViewModel carViewModel = new CarViewModel(); 
+        CarViewModel carViewModel = new CarViewModel();
 
         public CarInfoPage()
         {
@@ -73,7 +74,7 @@ namespace Wpf
 
         private void AddCarInfo(object sender, RoutedEventArgs e)
         {
-            CarWindow carWindow = new CarWindow(carViewModel,"Insert");
+            CarWindow carWindow = new CarWindow(carViewModel, "Insert");
             carWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             carWindow.Show();
         }

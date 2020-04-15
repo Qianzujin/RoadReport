@@ -120,6 +120,7 @@
     <Compile Include="Dao\EquipmentDao.cs" />
     <Compile Include="Dao\IndexDao.cs" />
     <Compile Include="Dao\SqliteDbHelper.cs" />
+    <Compile Include="Dao\TestRouteDao.cs" />
     <Compile Include="EquipmentInfoPage.xaml.cs">
       <DependentUpon>EquipmentInfoPage.xaml</DependentUpon>
     </Compile>
@@ -132,14 +133,25 @@
     <Compile Include="Model\Car.cs" />
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Index.cs" />
+    <Compile Include="Model\TestRoute.cs" />
     <Compile Include="OKWindow.xaml.cs">
       <DependentUpon>OKWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PavementTypeWindow.xaml.cs">
+      <DependentUpon>PavementTypeWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestRouteInfoPage.xaml.cs">
+      <DependentUpon>TestRouteInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TestRouteWindow.xaml.cs">
+      <DependentUpon>TestRouteWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CarViewModel.cs" />
     <Compile Include="ViewModel\CoverViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\TestRouteViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="CarInfoPage.xaml">
       <SubType>Designer</SubType>
@@ -191,11 +203,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PavementTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Setting.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StyleDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestRouteInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestRouteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -233,9 +257,7 @@
   <ItemGroup>
     <Resource Include="Resources\轮胎.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Picture\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Resource Include="Resources\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -246,6 +268,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dll\System.Data.SQLite.dll" />
+    <Resource Include="Resources\Picture\1.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="Resources\Tire.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
