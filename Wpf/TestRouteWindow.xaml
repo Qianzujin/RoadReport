@@ -82,19 +82,19 @@
                     <StackPanel Margin="5"  >
                         <WrapPanel Margin="5" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" Text="试验路线"></TextBlock>
-                            <TextBox Name="trbTestRoutes" Text="{Binding TestRoutes}" FontSize="15" Margin="20 0 0 0" Width="180" Height="25"></TextBox>
+                            <TextBox Name="trbTestRoutes" Text="{Binding TestRoutes,Mode=OneTime}" FontSize="15" Margin="20 0 0 0" Width="180" Height="25"></TextBox>
                         </WrapPanel>
                         <WrapPanel Margin="5" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" Text="试验里程"></TextBlock>
-                            <TextBox Name="trbLineMileage" Text="{Binding LineMileage}" FontSize="15" Margin="20 0 0 0" Width="180" Height="25"></TextBox>
+                            <TextBox Name="trbLineMileage" Text="{Binding LineMileage,Mode=OneTime}" FontSize="15" Margin="20 0 0 0" Width="180" Height="25"></TextBox>
                         </WrapPanel>
                         <WrapPanel Margin="5" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" Text="路面材质"></TextBlock>
-                            <TextBox Name="trbMaterial" Text="{Binding Material}"  FontSize="15" Margin="20 0 0 0" Width="180" Height="25"></TextBox>
+                            <TextBox Name="trbMaterial" Text="{Binding Material,Mode=OneTime}"  FontSize="15" Margin="20 0 0 0" Width="180" Height="25"></TextBox>
                         </WrapPanel>
                         <WrapPanel Margin="5" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" Text="试验时间"></TextBlock>
-                            <TextBox Name="trbTime" Text="{Binding Time}" FontSize="15" Margin="20 0 0 0" Width="180" Height="25"></TextBox>
+                            <TextBox Name="trbTime" Text="{Binding Time,Mode=OneTime}" FontSize="15" Margin="20 0 0 0" Width="180" Height="25"></TextBox>
                         </WrapPanel>
                     </StackPanel>
 

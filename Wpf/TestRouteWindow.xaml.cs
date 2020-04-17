@@ -39,13 +39,24 @@ namespace Wpf
                 }
             };
 
-            this.testRouteViewModelSelf = testRouteViewModel;
+            //中间窗口和下层窗口解耦问题，暂时想不清楚，放一放
+            if (OperationFlag == "Update")
+            {
+                this.pavementTypeInfoDataGrid.DataContext = testRouteViewModel;
+            }
+            else if (OperationFlag == "Insert")
+            {
+                this.DataContext = testRouteViewModel;
+                testRouteViewModel.pavementTypeView.Clear();
+                this.trbLineMileage.Text = "";
+                this.trbMaterial.Text ="";
+                this.trbPicture.Source  = null;
+                this.trbTestRoutes.Text = "";
+                this.trbTime.Text = "";
+            }
 
-
-         
-            this.DataContext = testRouteViewModel;
+            this.testRouteViewModelSelf = testRouteViewModel;     
             this.trbUpdate = trb;
-            //this.DataContext = trb;
             this.OperationFlag = OperationFlag;
         }
 
