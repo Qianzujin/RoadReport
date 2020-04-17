@@ -31,7 +31,7 @@ namespace Wpf
 
         private void AddTestRouteInfo(object sender, RoutedEventArgs e)
         {
-            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "Insert", -1);
+            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "Insert", null);
             testRouteWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             testRouteWindow.Show();
         }
@@ -45,11 +45,14 @@ namespace Wpf
         {
             //获取当前数据传给修改窗口
             TestRouteBase trb = this.testRouteDataGrid.SelectedItem as TestRouteBase;
-            //var tr = testRouteViewModel.GetCurrectTestRoute(trb.Index);
-            trb.IsChecked = true;
-            //equ.IsChecked = true;
+            //更新pavementType修改窗口的视图数据
+            //更新当前视图
+            var MyVM = this.testRouteViewModel;
+            if (MyVM != null && MyVM.SelectPavementTypeCommand.CanExecute(trb))
+                MyVM.SelectPavementTypeCommand.Execute(trb);
+
             //显示前更新路面类型数据
-            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "Update", trb.Index);
+            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "Update", trb);
             testRouteWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             testRouteWindow.Show();
         }

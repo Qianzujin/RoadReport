@@ -22,10 +22,10 @@ namespace Wpf.Dao
         {
             db.CreateTable("TestRouteBaseInfo",
                 new string[] {
-               "Idx" ,"IsChecked","TestRoutes", "LineMileage",
+               "Idx" ,"TestRoutes", "LineMileage",
                     "Material", "Time", "Picture"
             },
-            new string[] {"INT","BOOLEAN","TEXT",
+            new string[] {"INTEGER PRIMARY KEY AUTOINCREMENT","TEXT",
                 "TEXT","TEXT","TEXT","TEXT"
             });
         }
@@ -35,9 +35,9 @@ namespace Wpf.Dao
         {
             db.CreateTable("PavementTypeInfo",
                 new string[] {
-               "Idx","Id","Name","Length", "Percent","Picture"
+               "Id","Idx","Name","Length", "Percent","Picture"
             },
-            new string[] {"INT","INT","TEXT","TEXT","TEXT","TEXT"
+            new string[] {"INTEGER PRIMARY KEY AUTOINCREMENT","INTEGER","TEXT","TEXT","TEXT","TEXT"
             });
         }
 
@@ -51,6 +51,8 @@ namespace Wpf.Dao
         public TestRouteDao()
         {
             CreateClient();
+            //CreateTableTestRouteBaseInfo();
+            //CreateTablePavementTypeInfo();
         }
 
         //查询Idx对应的路面类型信息
@@ -58,13 +60,14 @@ namespace Wpf.Dao
         {
             pavementTypeList.Clear();
             //var reader = db.ReadFullTable("PavementTypeInfo");
-            var reader = db.ExecuteQuery("Select * From" + "PavementTypeInfo" + "where idx=" + Index.ToString());
+            //注意语句中的空格
+            var reader = db.ExecuteQuery("Select * From" +" "+ "PavementTypeInfo" + " "+"where Idx=" + Index.ToString());
             while (reader.Read())
             {
                 pavementTypeList.Add(new PavementType
-                {
-                    Index = Convert.ToInt16(reader["Idx"]),
+                {                
                     Id = Convert.ToInt16(reader["Id"]),
+                    Index = Convert.ToInt16(reader["Idx"]),
                     Name = Convert.ToString(reader["Name"]),
                     Length = Convert.ToString(reader["Length"]),
                     Percent = Convert.ToString(reader["Percent"]),
@@ -84,7 +87,6 @@ namespace Wpf.Dao
                 testRouteBaseList.Add(new TestRouteBase
                 {
                     Index = Convert.ToInt16(reader["Idx"]),
-                    IsChecked = Convert.ToBoolean(reader["IsChecked"]),
                     TestRoutes = Convert.ToString(reader["TestRoutes"]),
                     LineMileage = Convert.ToString(reader["LineMileage"]),
                     Material = Convert.ToString(reader["Material"]),
@@ -127,7 +129,6 @@ namespace Wpf.Dao
                     "Material", "Time", "Picture"
             }, new string[] {
                     tr.TestRouteBase.Index.ToString(),
-                    tr.TestRouteBase.IsChecked.ToString(),
                     tr.TestRouteBase.TestRoutes.ToString(),
                     tr.TestRouteBase.LineMileage.ToString(),
                     tr.TestRouteBase.Material.ToString(),
@@ -158,13 +159,11 @@ namespace Wpf.Dao
         //增加测试路线信息
         public void Insert(TestRoute tr)
         {
-            //增加测试路线基础信息
+            //增加测试路线基础信息Idx自增
             db.InsertInto("TestRouteBaseInfo", new string[]
-                { "Idx" ,"IsChecked","TestRoutes", "LineMileage",
+                { "TestRoutes", "LineMileage",
                     "Material", "Time", "Picture"},
                 new string[] {
-                    tr.TestRouteBase.Index.ToString(),
-                    tr.TestRouteBase.IsChecked.ToString(),
                     tr.TestRouteBase.TestRoutes.ToString(),
                     tr.TestRouteBase.LineMileage.ToString(),
                     tr.TestRouteBase.Material.ToString(),
@@ -172,14 +171,15 @@ namespace Wpf.Dao
                     tr.TestRouteBase.Picture.ToString(),
                 });
 
-            //增加测试路线基础信息对应的路面类型信息
+            string lastIdx = db.ExecuteQueryLastIdx();
+
+            //增加测试路线基础信息对应的路面类型信息,Id自增
             for (int i = 0; i < tr.PavementTypeInfo.Count(); i++)
             {
                 db.InsertInto("PavementTypeInfo", new string[]
-                { "Index", "Id", "Name", "Length", "Percent", "Picture" }
+                {  "Idx", "Name", "Length", "Percent", "Picture" }
                 , new string[] {
-                        tr.PavementTypeInfo[i].Index.ToString(),
-                        tr.PavementTypeInfo[i].Id.ToString(),
+                        lastIdx,
                         tr.PavementTypeInfo[i].Name.ToString(),
                         tr.PavementTypeInfo[i].Length.ToString(),
                         tr.PavementTypeInfo[i].Percent.ToString(),

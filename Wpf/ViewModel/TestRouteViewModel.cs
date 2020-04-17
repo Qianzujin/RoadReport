@@ -41,49 +41,61 @@ namespace Wpf.ViewModel
         //构造函数
         public TestRouteViewModel()
         {
-            // SelectAll();
-            PavementType pt = new PavementType() {
-                Index =1, Id=1,  Length="22", Name="测试",  Percent="11",
-                 Picture = new System.Windows.Media.Imaging.BitmapImage(new Uri("./Resources/Picture/1.jpg", UriKind.RelativeOrAbsolute))
-            };
-            List<PavementType> ptList = new List<PavementType>();
-            
-            for (int i = 0; i < 11; i++)
-            {
-                ptList.Add(new PavementType()
-                {
-                    Index = 1,
-                    Id = i,
-                    Length = "22",
-                    Name = "测试",
-                    Percent = "11",
-                    Picture = new System.Windows.Media.Imaging.BitmapImage(new Uri("./Resources/Picture/1.jpg", UriKind.RelativeOrAbsolute))
-                });
-            }
-
-            testRouteList.Add(new TestRoute
-            {
-                PavementTypeInfo = ptList,
-                TestRouteBase = new TestRouteBase()
-                {
-                    Index = 1,
-                    IsChecked = false,
-                    LineMileage = "1",
-                    Material = "1",
-                    TestRoutes = "lux",
-                    Time = "a",
-                    Picture = new System.Windows.Media.Imaging.BitmapImage(new Uri("./Resources/Picture/1.jpg", UriKind.RelativeOrAbsolute))
-                }
-            });
+            SelectAll();
+            //PavementType pt = new PavementType() {
+            //    Index =1, Id=1,  Length="22", Name="测试",  Percent="11",
+            //     Picture = new System.Windows.Media.Imaging.BitmapImage(new Uri("./Resources/Picture/1.jpg", UriKind.RelativeOrAbsolute))
+            //};
+            //List<PavementType> ptList = new List<PavementType>();
+            //
+            //for (int i = 0; i < 11; i++)
+            //{
+            //    ptList.Add(new PavementType()
+            //    {
+            //        Index = 1,
+            //        Id = i,
+            //        Length = "22",
+            //        Name = "测试",
+            //        Percent = "11",
+            //        Picture = new System.Windows.Media.Imaging.BitmapImage(new Uri("./Resources/Picture/1.jpg", UriKind.RelativeOrAbsolute))
+            //    });
+            //}
+            //
+            //pavementTypeView.Add(new PavementType()
+            //{
+            //    Index = 1,
+            //    Id = 1,
+            //    Length = "22",
+            //    Name = "测试",
+            //    Percent = "11",
+            //    Picture = new System.Windows.Media.Imaging.BitmapImage(new Uri("./Resources/Picture/1.jpg", UriKind.RelativeOrAbsolute))
+            //});
+            //
+            //testRouteList.Add(new TestRoute
+            //{
+            //    PavementTypeInfo = ptList,
+            //    TestRouteBase = new TestRouteBase()
+            //    {
+            //        Index = 0,
+            //        LineMileage = "1",
+            //        Material = "1",
+            //        TestRoutes = "lux",
+            //        Time = "a",
+            //        Picture = new System.Windows.Media.Imaging.BitmapImage(new Uri("./Resources/Picture/1.jpg", UriKind.RelativeOrAbsolute))
+            //    }
+            //});
             UpdateViewData();
 
             DeleteCommand = new RelayCommand<int>(Index => Delete(Index));
             UpdateCommand = new RelayCommand<TestRoute>(tr => Update(tr));
             InsertCommand = new RelayCommand<TestRoute>(tr => Insert(tr));
-            UpdatePavementTypeCommand = new RelayCommand<PavementType>(t => UpdatePavementType(t));
-        // SelectCommand = new RelayCommand<List<string>>(filterList => Select(filterList));
-    }
-         
+            UpdatePavementTypeCommand = new RelayCommand<List<PavementType>>(t => UpdatePavementType(t));
+            DeletePavementTypeCommand = new RelayCommand<PavementType>(t => DeletePavementType(t));
+            SelectPavementTypeCommand = new RelayCommand<TestRouteBase>(t => SelectPavementType(t));
+
+            // SelectCommand = new RelayCommand<List<string>>(filterList => Select(filterList));
+        }
+
         //获取当前完整数据
         public TestRoute GetCurrectTestRoute(int Index)
         {
@@ -99,9 +111,12 @@ namespace Wpf.ViewModel
 
         // 操作命令
         public RelayCommand<int> DeleteCommand { get; set; }
-        public RelayCommand<TestRoute> UpdateCommand { get; set; }     
+        public RelayCommand<TestRoute> UpdateCommand { get; set; }
         public RelayCommand<TestRoute> InsertCommand { get; set; }
-        public RelayCommand<PavementType> UpdatePavementTypeCommand { get; set; }
+        public RelayCommand<List<PavementType>> UpdatePavementTypeCommand { get; set; }
+        public RelayCommand<PavementType> DeletePavementTypeCommand { get; set; }
+        public RelayCommand<TestRouteBase> SelectPavementTypeCommand { get; set; }
+
         //public RelayCommand<List<string>> SelectCommand { get; set; }
 
         //更新PavementTypeView显示数据集 
@@ -121,9 +136,10 @@ namespace Wpf.ViewModel
         }
 
         //更新路面类型显示数据集
-        private void UpdateViewData() 
+        private void UpdateViewData()
         {
             pavementTypeView.Clear();
+            testRouteBaseView.Clear();
             for (int i = 0; i < testRouteList.Count(); i++)
             {
                 testRouteBaseView.Add(testRouteList[i].TestRouteBase);
@@ -160,35 +176,52 @@ namespace Wpf.ViewModel
         }
 
         //增加测试路线 
-        private void Insert(TestRoute tr) 
+        private void Insert(TestRoute tr)
         {
+
+            //testRouteDao.Insert(tr);
             testRouteDao.Insert(tr);
             SelectAll();
         }
 
-        private void UpdatePavementType(PavementType pt)
+        private void UpdatePavementType(List<PavementType> ptList)
         {
             //获取选中的测试路线路面信息
-            foreach (var item in this.testRouteList)
+
+            pavementTypeView.Clear();
+
+            foreach (var item in ptList)
             {
-                if (item.TestRouteBase.Index == pt.Index)
+                pavementTypeView.Add(item);
+            }
+        }
+
+
+        private void DeletePavementType(PavementType pt)
+        {
+            pavementTypeView.Remove(pt);
+        }
+
+
+        private void SelectPavementType(TestRouteBase trb)
+        {
+            //根据Idx找到对应的TestRoute
+            pavementTypeView.Clear();
+           // testRouteBaseView.Clear();
+
+            foreach (var item in testRouteList)
+            {
+                if (item.TestRouteBase == trb)
                 {
-                    for (int i = 0; i < item.PavementTypeInfo.Count(); i++)
+                    //遍历对应的路面类型
+                    foreach (var i in item.PavementTypeInfo)
                     {
-                        if (item.PavementTypeInfo[i].Id == pt.Id)
-                        {
-                            //找到需要修改的元素PavementType
-                            //System.Windows.MessageBox.Show("");
-                            item.PavementTypeInfo[i] = pt;
-                        }
+                        pavementTypeView.Add(i);
                     }
+                  
                 }
             }
-            //testRouteBaseView.Clear();
-            //for (int i = 0; i < testRouteList.Count(); i++)
-            //{
-            //    testRouteBaseView.Add(testRouteList[i].TestRouteBase);
-            //}
+
         }
     }
 }

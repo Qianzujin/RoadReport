@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,11 +24,10 @@ namespace Wpf
     /// </summary>
     public partial class PavementTypeWindow : Window
     {
-        private TestRouteViewModel testRouteViewModelSelf;
-        private int Index = -1;
-        private int Id = -1;
+        //private TestRouteViewModel testRouteViewModelSelf;
+        public PavementType pt= new PavementType();
 
-        public PavementTypeWindow(TestRouteViewModel testRouteViewModel, string OperationFlag, int Index, int Id)
+        public PavementTypeWindow(TestRouteViewModel testRouteViewModel,PavementType pt)
         {
             InitializeComponent();
             this.MouseLeftButtonDown += (sender, e) =>
@@ -36,17 +37,8 @@ namespace Wpf
                     this.DragMove();
                 }
             };
-            this.testRouteViewModelSelf = testRouteViewModel;
-            this.DataContext = testRouteViewModel.PavementTypeView[Id];
-            this.Index = Index;
-            if (OperationFlag == "Insert")
-            {
-                this.Id = Id;
-            }
-            else if (OperationFlag == "Update")
-            {
 
-            }
+            this.DataContext = pt;
         }
 
         private void Min(object sender, MouseButtonEventArgs e)
@@ -64,45 +56,48 @@ namespace Wpf
             //获取当前操作属性
             //获取当前操作对象 Index
             //获取当前的值
-            PavementType pt = new PavementType
-            {
-                Id = this.Id,
-                Index = this.Index,
-                Name = this.ptName.Text,
-                Length = this.ptLength.Text,
-                Percent = this.ptPercent.Text,
-                Picture = this.ptPicture.Source as BitmapImage
-            };
-
-    
-            var MyVM = this.testRouteViewModelSelf;
-            if (MyVM != null && MyVM.UpdatePavementTypeCommand.CanExecute(pt))
-                MyVM.UpdatePavementTypeCommand.Execute(pt);
-
-            //获取选中的测试路线路面信息
-            // foreach (var item in this.testRouteViewModelSelf.testRouteList)
+            // pt = new PavementType
             // {
-            //     if (item.TestRouteBase.Index == Index)
-            //     {
-            //         for (int i = 0; i < item.PavementTypeInfo.Count(); i++)
-            //         {
-            //             if (item.PavementTypeInfo[i].Id == this.Id)
-            //             {
-            //                 //找到需要修改的元素PavementType
-            //             }
-            //         }
-            //     }
-            // }
+            //     Id = 0,
+            //     Index = 0,
+            //     Name = this.ptName.Text,
+            //     Length = this.ptLength.Text,
+            //     Percent = this.ptPercent.Text,
+            //     Picture = this.ptPicture.Source as BitmapImage
+            // };
 
-            ////获取选中的测试路线基础信息
-            //foreach (var item in this.testRouteViewModelSelf.TestRouteBaseView)
-            //{
-            //    if (item.Index == Index)
-            //    {
-            //        TestRoute tr = new TestRoute { PavementTypeInfo = pt, TestRouteBase = item };
-            //    }
-            //}
+            pt.Name = this.ptName.Text;
+            pt.Length = this.ptLength.Text;
+            pt.Percent = this.ptPercent.Text;
+            pt.Picture = this.ptPicture.Source as BitmapImage;
 
+            this.Close();
+        }
+
+        private void LoadImage(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog fileDialog = new OpenFileDialog();
+            fileDialog.Filter = "jpg图片|*.jpg|png图片|*.png|所有文件|*.*";
+            fileDialog.ShowDialog();
+
+            if (fileDialog.FileName != "")
+            {
+                //获取文件名，复制到相对路径下
+                System.IO.Path.GetFileName(fileDialog.FileName);
+                var path = Environment.CurrentDirectory + "\\Resources\\Picture\\" + System.IO.Path.GetFileName(fileDialog.FileName);
+
+                if (File.Exists(path))
+                {
+                    MessageBox.Show("文件已存在！");
+                    //return;
+                }
+                else
+                {
+                    File.Copy(fileDialog.FileName, path);
+                }
+                this.ptPicture.Source = new BitmapImage(new Uri(path, UriKind.Absolute));
+                //this.img.Source = new BitmapImage(new Uri(@"/Wpf;component/Resources/Picture/" + System.IO.Path.GetFileName(fileDialog.FileName), UriKind.Relative));
+            }
         }
     }
 }

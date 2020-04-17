@@ -10,8 +10,8 @@ namespace Wpf.Model
     //路面类型
     public class PavementType
     {
-        public int Index { get; set; }//索引
         public int Id { get; set; } //是否选中
+        public int Index { get; set; }//父索引
         public string Name { get; set; } //路面类型名称
         public string Length { get; set; } //路面长度
         public string Percent { get; set; } //路面长度百分比
@@ -26,7 +26,6 @@ namespace Wpf.Model
     public class TestRouteBase
     {
         public int Index { get; set; }//索引
-        public bool IsChecked { get; set; } //是否选中
         public string TestRoutes { get; set; } //试验路线
         public string LineMileage { get; set; }//线路里程
         public string Material { get; set; }//材料

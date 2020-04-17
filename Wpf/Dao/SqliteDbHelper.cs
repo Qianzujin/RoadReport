@@ -79,6 +79,15 @@ namespace Wpf.Dao
             reader = dbCommand.ExecuteReader();
             return reader;
         }
+        public string ExecuteQueryLastIdx()  
+        {
+            string sqlQuery;
+            sqlQuery = "select last_insert_rowid() newid";
+            dbCommand = dbConnection.CreateCommand();
+            dbCommand.CommandText = sqlQuery;
+            var i = dbCommand.ExecuteScalar();
+            return i.ToString();
+        }
         /// <summary>
         /// 查询该表所有数据
         /// </summary>
@@ -111,7 +120,11 @@ namespace Wpf.Dao
             }
             query += ")";
             return ExecuteQuery(query);
+           
         }
+
+     
+
         /// <summary>
         /// 动态更新表结构
         /// </summary>
