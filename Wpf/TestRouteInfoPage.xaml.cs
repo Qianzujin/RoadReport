@@ -31,7 +31,9 @@ namespace Wpf
 
         private void AddTestRouteInfo(object sender, RoutedEventArgs e)
         {
-
+            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "Insert", -1);
+            testRouteWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            testRouteWindow.Show();
         }
 
         private void SelectTestRouteInfo(object sender, RoutedEventArgs e)
@@ -47,7 +49,7 @@ namespace Wpf
             trb.IsChecked = true;
             //equ.IsChecked = true;
             //显示前更新路面类型数据
-            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "update", trb.Index);
+            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "Update", trb.Index);
             testRouteWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             testRouteWindow.Show();
         }

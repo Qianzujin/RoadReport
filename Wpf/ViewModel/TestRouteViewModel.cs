@@ -26,7 +26,19 @@ namespace Wpf.ViewModel
         //测试路线对应的路面类型信息
         public ObservableCollection<PavementType> pavementTypeView = new ObservableCollection<PavementType>();
 
+        public ObservableCollection<PavementType> PavementTypeView
+        {
+            get { return pavementTypeView; }
+            set { pavementTypeView = value; RaisePropertyChanged(); }
+        }
 
+        public ObservableCollection<TestRouteBase> TestRouteBaseView
+        {
+            get { return testRouteBaseView; }
+            set { testRouteBaseView = value; RaisePropertyChanged(); }
+        }
+
+        //构造函数
         public TestRouteViewModel()
         {
             // SelectAll();
@@ -36,8 +48,6 @@ namespace Wpf.ViewModel
             };
             List<PavementType> ptList = new List<PavementType>();
             
-
-
             for (int i = 0; i < 11; i++)
             {
                 ptList.Add(new PavementType()
@@ -67,7 +77,6 @@ namespace Wpf.ViewModel
             });
             UpdateViewData();
 
-
             DeleteCommand = new RelayCommand<int>(Index => Delete(Index));
             UpdateCommand = new RelayCommand<TestRoute>(tr => Update(tr));
             InsertCommand = new RelayCommand<TestRoute>(tr => Insert(tr));
@@ -86,18 +95,6 @@ namespace Wpf.ViewModel
                 }
             }
             return null;
-        }
-
-        public ObservableCollection<PavementType> PavementTypeView
-        {
-            get { return pavementTypeView; }
-            set { pavementTypeView = value; RaisePropertyChanged(); }
-        }
-
-        public ObservableCollection<TestRouteBase> TestRouteBaseView
-        {
-            get { return testRouteBaseView; }
-            set { testRouteBaseView = value; RaisePropertyChanged(); }
         }
 
         // 操作命令
@@ -169,11 +166,8 @@ namespace Wpf.ViewModel
             SelectAll();
         }
 
-
-
         private void UpdatePavementType(PavementType pt)
         {
-
             //获取选中的测试路线路面信息
             foreach (var item in this.testRouteList)
             {

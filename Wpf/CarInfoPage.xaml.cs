@@ -54,9 +54,7 @@ namespace Wpf
         {
             //获取当前数据传给修改窗口
             Car car = this.carDataGrid.SelectedItem as Car;
-            car.IsChecked = true;
-
-            CarWindow carWindow = new CarWindow(carViewModel, "Update");
+            CarWindow carWindow = new CarWindow(carViewModel, "Update", car);
             carWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             carWindow.Show();
         }
@@ -74,7 +72,7 @@ namespace Wpf
 
         private void AddCarInfo(object sender, RoutedEventArgs e)
         {
-            CarWindow carWindow = new CarWindow(carViewModel, "Insert");
+            CarWindow carWindow = new CarWindow(carViewModel, "Insert",null);
             carWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             carWindow.Show();
         }

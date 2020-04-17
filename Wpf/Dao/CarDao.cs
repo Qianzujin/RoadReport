@@ -19,11 +19,11 @@ namespace Wpf.Dao
         {
             db.CreateTable("CarInfo",
                 new string[] {
-               "Idx" ,"IsChecked","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated", "Displacement",
+               "Idx" ,"Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated", "Displacement",
                     "FrontSuspensionSystem","RearSuspensionSystem","DriveMethod","Gearbox",
                     "Brake","BuyingTime","InitialOdometerReading","Picture"
             },
-            new string[] {"INT","BOOLEAN","TEXT","TEXT","INT","DOUBLE","DOUBLE","DOUBLE","TEXT","TEXT",
+            new string[] {"INTEGER PRIMARY KEY AUTOINCREMENT","TEXT","TEXT","INT","DOUBLE","DOUBLE","DOUBLE","TEXT","TEXT",
             "TEXT","TEXT","TEXT","DATETIME","INT", "TEXT"
             });
         }
@@ -37,7 +37,7 @@ namespace Wpf.Dao
         public CarDao()
         {
             CreateClient();
-           // CreateTable();
+            //CreateTable();
         }
 
         //查询所有数据
@@ -47,11 +47,10 @@ namespace Wpf.Dao
             var reader = db.ReadFullTable("CarInfo");
             while (reader.Read())
             {
- 
+
                 carList.Add(new Car
                 {
                     Index = Convert.ToInt16(reader["Idx"]),
-                    IsChecked = Convert.ToBoolean(reader["IsChecked"]),
                     Type = Convert.ToString(reader["Type"]),
                     CarNumber = Convert.ToString(reader["CarNumber"]),
                     SeatNum = Convert.ToInt16(reader["SeatNum"]),
@@ -67,7 +66,7 @@ namespace Wpf.Dao
                     InitialOdometerReading = Convert.ToInt16(reader["InitialOdometerReading"]),
                     Picture = new BitmapImage(new Uri(Convert.ToString(reader["Picture"]), UriKind.RelativeOrAbsolute))
                 });
-                
+
             }
             return carList;
         }
@@ -77,31 +76,50 @@ namespace Wpf.Dao
         {
             db.InsertInto(
                 "CarInfo",
-                new string[] { "Idx","IsChecked","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated",
+                new string[] { "Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated",
                     "Displacement","FrontSuspensionSystem","RearSuspensionSystem","DriveMethod",
                     "Gearbox","Brake","BuyingTime","InitialOdometerReading","Picture" },
-                new string[] { car.Index.ToString(),car.IsChecked.ToString(),car.Type.ToString(),car.CarNumber.ToString(),
-                car.SeatNum.ToString(), car.CurbWeight.ToString(),car.FullRated.ToString(),car.Displacement.ToString(),
-                car.FrontSuspensionSystem.ToString(),car.RearSuspensionSystem.ToString(),
-                car.DriveMethod.ToString(),car.Gearbox.ToString(),car.Brake.ToString(),
-                car.BuyingTime.ToString("s"),car.InitialOdometerReading.ToString(),car.Picture.ToString()
+                new string[] {
+                    car.Type.ToString(),
+                    car.CarNumber.ToString(),
+                    car.SeatNum.ToString(),
+                    car.CurbWeight.ToString(),
+                    car.FullRated.ToString(),
+                    car.Displacement.ToString(),
+                    car.FrontSuspensionSystem.ToString(),
+                    car.RearSuspensionSystem.ToString(),
+                    car.DriveMethod.ToString(),car.Gearbox.ToString() ,
+                    car.Brake.ToString(),
+                    car.BuyingTime.ToString("s"),
+                    car.InitialOdometerReading.ToString(),
+                    car.Picture.ToString()
                 });
         }
 
         //修改
-        public void Update(Car car) 
+        public void Update(Car car)
         {
             db.UpdateInto(
                 "CarInfo",
-                new string[] { "Idx","IsChecked","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated",
+                new string[] { "Idx","Type", "CarNumber", "SeatNum", "CurbWeight", "FullRated",
                     "Displacement","FrontSuspensionSystem","RearSuspensionSystem","DriveMethod",
                     "Gearbox","Brake","BuyingTime","InitialOdometerReading","Picture" },
-                new string[] { car.Index.ToString(),car.IsChecked.ToString(),car.Type.ToString(),car.CarNumber.ToString(),
-                car.SeatNum.ToString(), car.CurbWeight.ToString(),car.FullRated.ToString(),car.Displacement.ToString(),
-                car.FrontSuspensionSystem.ToString(),car.RearSuspensionSystem.ToString(),
-                car.DriveMethod.ToString(),car.Gearbox.ToString(),car.Brake.ToString(),
-                car.BuyingTime.ToString("s"),car.InitialOdometerReading.ToString(),car.Picture.ToString()
-                },"Idx", car.Index.ToString());
+                new string[] {
+                    car.Index.ToString(),car.Type.ToString(),
+                    car.CarNumber.ToString(),
+                    car.SeatNum.ToString(),
+                    car.CurbWeight.ToString(),
+                    car.FullRated.ToString(),
+                    car.Displacement.ToString(),
+                    car.FrontSuspensionSystem.ToString(),
+                    car.RearSuspensionSystem.ToString(),
+                    car.DriveMethod.ToString(),
+                    car.Gearbox.ToString(),
+                    car.Brake.ToString(),
+                    car.BuyingTime.ToString("s"),
+                    car.InitialOdometerReading.ToString(),
+                    car.Picture.ToString()
+                }, "Idx", car.Index.ToString());
         }
 
         //删除

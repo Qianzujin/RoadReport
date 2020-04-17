@@ -104,6 +104,7 @@
             <Grid Grid.Row="3" >
                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Center">
                     <Button Background="#5BBAFA" Margin="50 0 0 0" Width="80" Height="30" Content="图片"/>
+                    <Button Background="#5BBAFA" Click="Insert" Margin="50 0 0 0" Width="80" Height="30" Content="增加"/>
                     <Button Background="#5BBAFA" Click="Submit" Margin="50 0 0 0" Width="80" Height="30" Content="提交"/>
                 </WrapPanel>
             </Grid>

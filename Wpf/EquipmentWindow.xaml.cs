@@ -27,12 +27,12 @@ namespace Wpf
         //获取父窗口视图模型对象
         EquipmentViewModel equipmentViewModelSelf = new EquipmentViewModel();
         //本窗口视图模型对象
-        Equipment equ;
+        Equipment equSelf; 
         //操作标志
         string operationFlag;
 
         //有参构造
-        public EquipmentWindow(EquipmentViewModel equipmentViewModel, string OperationFlag)
+        public EquipmentWindow(EquipmentViewModel equipmentViewModel, string OperationFlag, Equipment equ)
         {
             InitializeComponent();
             this.MouseLeftButtonDown += (sender, e) =>
@@ -43,18 +43,12 @@ namespace Wpf
                 }
             };
 
-            //初始化窗口参数
-            for (int i = 0; i < equipmentViewModel.EquipmentView.Count(); i++)
+            if (equ != null)
             {
-                if (equipmentViewModel.EquipmentView[i].IsChecked == true)
-                {
-                    equipmentViewModel.EquipmentView[i].IsChecked = false;
-                    this.DataContext = equipmentViewModel.EquipmentView[i];
-                    this.equ = equipmentViewModel.EquipmentView[i];
-                    break;
-                }
+                this.equSelf = equ;
+                this.DataContext = equ;
             }
-
+            
             this.equipmentViewModelSelf = equipmentViewModel;
             this.operationFlag = OperationFlag;
         }
@@ -116,33 +110,19 @@ namespace Wpf
                     Name = this.nameTxtBox.Text,
                     Code = this.codeTxtBox.Text,
                     Picture = this.img.Source as BitmapImage,
-                    IsChecked = false,
                     TermOfValidity = Convert.ToDateTime(this.datePicker.Text.Trim())
                 };
 
                 //触发Command更新数据，必须使用同一个视图数据模型
                 if (this.operationFlag == "add")
-                {
-                    //增加索引值
-                    var idxList = equipmentViewModelSelf.EquipmentView.Select(a => a.Index).ToList();
-                    if (idxList.Count() == 0)
-                    {
-                        equ.Index = 1;
-                    }
-                    else
-                    {
-                        equ.Index = idxList.Max() + 1;
-                    }
-                   
+                {                  
                     var MyVM = equipmentViewModelSelf;
                     if (MyVM != null && MyVM.InsertCommand.CanExecute(equ))
                         MyVM.InsertCommand.Execute(equ);
                 }
-                else if (this.operationFlag == "update")
+                else if (this.operationFlag == "Update")
                 {
-                    //修改索引值
-                    equ.Index = this.equ.Index;
-
+                    equ.Index = this.equSelf.Index;
                     OKWindow okWindow = new OKWindow("修改数据", "确实要修改这条数据吗？");
                     okWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                     okWindow.ShowDialog();
@@ -157,7 +137,6 @@ namespace Wpf
                 {
                     MessageBox.Show("有一点小问题！");
                 }
-
             }
             else
             {

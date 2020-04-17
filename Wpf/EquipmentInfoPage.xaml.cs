@@ -36,9 +36,8 @@ namespace Wpf
         {
             //获取当前数据传给修改窗口
             Equipment equ = this.equipmentDataGrid.SelectedItem as Equipment;
-            equ.IsChecked = true;
 
-            EquipmentWindow equipmentWindow = new EquipmentWindow(equipmentViewModel, "update");
+            EquipmentWindow equipmentWindow = new EquipmentWindow(equipmentViewModel, "Update", equ);
             equipmentWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             equipmentWindow.Show();
         }
@@ -103,7 +102,7 @@ namespace Wpf
             //Equipment equ = this.equipmentDataGrid.SelectedItem as Equipment;
             //equ.IsChecked = true;
 
-            EquipmentWindow equipmentWindow = new EquipmentWindow(equipmentViewModel,"add");
+            EquipmentWindow equipmentWindow = new EquipmentWindow(equipmentViewModel,"add",null);
             equipmentWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             equipmentWindow.Show();
         }

@@ -104,7 +104,7 @@ namespace Wpf.Dao
             }
             query += ")"
 
-            +" VALUES (" + values[0];
+            +" VALUES ('" + values[0]+"'";
             for (int i = 1; i < values.Length; ++i)
             {
                 query += ", '" + values[i]+"'";

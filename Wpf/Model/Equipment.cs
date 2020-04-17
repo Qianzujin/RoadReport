@@ -14,6 +14,5 @@ namespace Wpf.Model
         public string Code { get; set; }//仪器编号
         public DateTime TermOfValidity { get; set; }//仪器有效期
         public BitmapImage Picture { get; set; } //仪器图片
-        public bool IsChecked { get; set; }//是否选中
     } 
 }

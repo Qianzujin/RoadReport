@@ -39,7 +39,14 @@ namespace Wpf
             this.testRouteViewModelSelf = testRouteViewModel;
             this.DataContext = testRouteViewModel.PavementTypeView[Id];
             this.Index = Index;
-            this.Id = Id;
+            if (OperationFlag == "Insert")
+            {
+                this.Id = Id;
+            }
+            else if (OperationFlag == "Update")
+            {
+
+            }
         }
 
         private void Min(object sender, MouseButtonEventArgs e)

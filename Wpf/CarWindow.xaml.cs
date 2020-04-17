@@ -26,9 +26,9 @@ namespace Wpf
     {
         CarViewModel carViewModelSelf = new CarViewModel();
         string operationFlag;
-        Car car;
+        Car carSelf;
 
-        public CarWindow(CarViewModel carViewModel, string OperationFlag)
+        public CarWindow(CarViewModel carViewModel, string OperationFlag, Car car)
         {
             InitializeComponent();
             this.MouseLeftButtonDown += (sender, e) =>
@@ -45,18 +45,11 @@ namespace Wpf
                 t.Add(i);
             }
 
-            //初始化窗口参数
-            for (int i = 0; i < carViewModel.CarView.Count(); i++)
+            if (car != null)
             {
-                if (carViewModel.CarView[i].IsChecked == true)
-                {
-                    carViewModel.CarView[i].IsChecked = false;
-                    this.DataContext = carViewModel.CarView[i];
-                    this.car = carViewModel.CarView[i];
-                    break;
-                }
+                this.DataContext = car;
+                this.carSelf = car;
             }
-
 
             this.carSeatNum.ItemsSource = t;
             this.operationFlag = OperationFlag;
@@ -124,8 +117,7 @@ namespace Wpf
                 {
                     Car car = new Car
                     {
-                        Index = 0,
-                        IsChecked = false,
+                        Index = 0,                   
                         Type = this.carType.Text,
                         CarNumber = this.carNumber.Text,
                         SeatNum = Convert.ToInt16(this.carSeatNum.Text),
@@ -144,17 +136,7 @@ namespace Wpf
 
                     //新增数据
                     if (this.operationFlag == "Insert")
-                    {
-                        //增加索引值
-                        var idxList = carViewModelSelf.CarView.Select(a => a.Index).ToList();
-                        if (idxList.Count() == 0)
-                        {
-                            car.Index = 1;
-                        }
-                        else
-                        {
-                            car.Index = idxList.Max() + 1;
-                        }
+                    {                   
                         var MyVM = carViewModelSelf;
                         if (MyVM != null && MyVM.InsertCommand.CanExecute(car))
                         {
@@ -166,7 +148,7 @@ namespace Wpf
                     else if (this.operationFlag == "Update")
                     {
                         //修改索引值
-                        car.Index = this.car.Index;
+                        car.Index = this.carSelf.Index;
                         var MyVM = carViewModelSelf;
 
                         OKWindow okWindow = new OKWindow("修改数据", "确实要修改这条数据吗？");
