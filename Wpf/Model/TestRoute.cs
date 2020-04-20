@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Windows.Media.Imaging;
 namespace Wpf.Model
 {
     //路面类型
-    public class PavementType
+    public class PavementType : ObservableObject
     {
         public int Id { get; set; } //是否选中
         public int Index { get; set; }//父索引
@@ -36,7 +37,22 @@ namespace Wpf.Model
 
     public class TestRoute 
     {
-        public TestRouteBase TestRouteBase { get; set; } //路试线路基本信息
-        public List<PavementType> PavementTypeInfo { get; set; }//路面类型信息
+        private TestRouteBase testRouteBase;
+        public List<PavementType> pavementTypeInfo;
+
+        public TestRouteBase TestRouteBase
+        {
+            get { return testRouteBase; }
+            set { testRouteBase = value; }
+        }
+
+
+        public List<PavementType> PavementTypeInfo
+        {
+            get { return pavementTypeInfo; }
+            set { pavementTypeInfo = value; }
+        }
+        //public TestRouteBase TestRouteBase { get; set; } //路试线路基本信息
+        //public List<PavementType> PavementTypeInfo { get; set; }//路面类型信息
     }
 }

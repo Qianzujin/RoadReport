@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -90,7 +91,7 @@ namespace Wpf.ViewModel
             UpdateCommand = new RelayCommand<TestRoute>(tr => Update(tr));
             InsertCommand = new RelayCommand<TestRoute>(tr => Insert(tr));
             UpdatePavementTypeCommand = new RelayCommand<List<PavementType>>(t => UpdatePavementType(t));
-            DeletePavementTypeCommand = new RelayCommand<PavementType>(t => DeletePavementType(t));
+            DeletePavementTypeCommand = new RelayCommand<int>(t => DeletePavementType(t));
             SelectPavementTypeCommand = new RelayCommand<TestRouteBase>(t => SelectPavementType(t));
 
             // SelectCommand = new RelayCommand<List<string>>(filterList => Select(filterList));
@@ -114,7 +115,7 @@ namespace Wpf.ViewModel
         public RelayCommand<TestRoute> UpdateCommand { get; set; }
         public RelayCommand<TestRoute> InsertCommand { get; set; }
         public RelayCommand<List<PavementType>> UpdatePavementTypeCommand { get; set; }
-        public RelayCommand<PavementType> DeletePavementTypeCommand { get; set; }
+        public RelayCommand<int> DeletePavementTypeCommand { get; set; }
         public RelayCommand<TestRouteBase> SelectPavementTypeCommand { get; set; }
 
         //public RelayCommand<List<string>> SelectCommand { get; set; }
@@ -157,14 +158,7 @@ namespace Wpf.ViewModel
         //删除测试路线 
         private void Delete(int Index)
         {
-            //testRouteDao.Delete(Index);
-            for (int i = 0; i < testRouteList.Count(); i++)
-            {
-                if (testRouteList[i].TestRouteBase.Index == Index)
-                {
-                    testRouteList.RemoveAt(i);
-                }
-            }
+            testRouteDao.Delete(Index);
             SelectAll();
         }
 
@@ -197,9 +191,15 @@ namespace Wpf.ViewModel
         }
 
 
-        private void DeletePavementType(PavementType pt)
+        private void DeletePavementType(int Index)
         {
-            pavementTypeView.Remove(pt);
+            foreach (var item in pavementTypeView)
+            {
+                if (item.Index == Index)
+                {
+                    pavementTypeView.Remove(item);
+                }
+            }
         }
 
 
@@ -207,7 +207,7 @@ namespace Wpf.ViewModel
         {
             //根据Idx找到对应的TestRoute
             pavementTypeView.Clear();
-           // testRouteBaseView.Clear();
+            // testRouteBaseView.Clear();
 
             foreach (var item in testRouteList)
             {
@@ -218,10 +218,30 @@ namespace Wpf.ViewModel
                     {
                         pavementTypeView.Add(i);
                     }
-                  
+
                 }
             }
 
         }
+
+        public void TestRouteMessage(TestRouteBase trb)
+        {
+            TestRoute tr = new TestRoute();
+            foreach (var item in testRouteList)
+            {
+                if (item.TestRouteBase == trb)
+                {
+                    tr = item;
+                    Messenger.Default.Send(tr, "TestRouteMessage");
+                }
+            }
+        }
+
+
+
+
+
+
+
     }
 }

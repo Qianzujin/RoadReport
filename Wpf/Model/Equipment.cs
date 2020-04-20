@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace Wpf.Model
 {
-    public class Equipment
+    public class Equipment : ObservableObject
     {
         public int Index { get; set; }//索引
         public string Name { get; set; }//仪器名称

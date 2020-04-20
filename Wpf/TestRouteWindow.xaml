@@ -34,16 +34,16 @@
                 <RowDefinition Height="40"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Grid Grid.Row="0">
-                <DataGrid Name="pavementTypeInfoDataGrid" Margin="5"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding PavementTypeView }">
+            <Grid Grid.Row="0" >
+                <DataGrid Name="pavementTypeInfoDataGrid"    Margin="5"  Style="{StaticResource DataGridStyle}" >
                     <DataGrid.Columns>
-                        <DataGridTextColumn  IsReadOnly="True" Width="80" Header="路面类型" Binding="{Binding Name }"></DataGridTextColumn>
+                        <DataGridTextColumn  IsReadOnly="True" Width="80" Header="路面类型" Binding="{Binding Name,UpdateSourceTrigger=PropertyChanged}"></DataGridTextColumn>
                         <DataGridTextColumn IsReadOnly="True" Width="80"  Header="路面长度" Binding="{Binding Length}"></DataGridTextColumn>
                         <DataGridTextColumn IsReadOnly="True" Width="80" Header="百分比" Binding="{Binding Percent }"></DataGridTextColumn>
                         <DataGridTemplateColumn Width="*" Header="路面图片">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Picture}"></Image>
+                                    <Image Source="{Binding Picture,Mode=TwoWay}"></Image>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
@@ -52,7 +52,7 @@
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
-                                        <Button  Style="{StaticResource ButtonNormal}" Click="EditClick" Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
+                                        <Button  Style="{StaticResource ButtonNormal}" Click="EditClick"    Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
                                         <Button  Style="{StaticResource DeleteButton}" Click="DeleteClick"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
                                     </StackPanel>
                                 </DataTemplate>
@@ -70,7 +70,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Grid Grid.Column="0" DataContext="{Binding TestRouteBaseView }">
+                <Grid Grid.Column="0" DataContext="{Binding TestRouteBase}">
                     <StackPanel>
                         <Border Margin="5 10 5 10" BorderThickness="1" BorderBrush="Black" Width="210" Height="140">
                             <Image Name="trbPicture" Source="{Binding Picture,Mode=OneTime}"   Margin="2" ></Image>
@@ -78,7 +78,7 @@
                     </StackPanel>
                 </Grid>
 
-                <Grid Grid.Column="1" DataContext="{Binding TestRouteBaseView }">
+                <Grid Grid.Column="1" DataContext="{Binding TestRouteBase}">
                     <StackPanel Margin="5"  >
                         <WrapPanel Margin="5" HorizontalAlignment="Center">
                             <TextBlock VerticalAlignment="Center" Text="试验路线"></TextBlock>

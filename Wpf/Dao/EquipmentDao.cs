@@ -12,7 +12,7 @@ using Wpf.Model;
 namespace Wpf.Dao
 {
     //连接数据库Sqlite暂定 也可是其他数据库
-    class EquipmentDao : ObservableObject
+    class EquipmentDao
     {
         List<Equipment> equipmentList = new List<Equipment>();
         SqliteDbHelper db;//声明连接对象

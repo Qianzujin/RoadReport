@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Wpf.Model
 {
-    class Cover
+    class Cover : ObservableObject
     {
         public string Theme { get; set; }
         public string TestItems { get; set; } 

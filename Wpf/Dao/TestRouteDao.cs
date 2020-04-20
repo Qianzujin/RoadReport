@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ using Wpf.Model;
 
 namespace Wpf.Dao
 {
-    class TestRouteDao : ObservableObject
+    class TestRouteDao
     {
         List<TestRoute> testRouteList = new List<TestRoute>();
-        List<PavementType> pavementTypeList = new List<PavementType>();
+        // List<PavementType> pavementTypeList = new List<PavementType>();
         List<TestRouteBase> testRouteBaseList = new List<TestRouteBase>();
 
         SqliteDbHelper db;//声明连接对象
@@ -58,14 +59,14 @@ namespace Wpf.Dao
         //查询Idx对应的路面类型信息
         private List<PavementType> SelectAllPavementTypeInfo(int Index)
         {
-            pavementTypeList.Clear();
+            List<PavementType> pavementTypeList = new List<PavementType>();
             //var reader = db.ReadFullTable("PavementTypeInfo");
             //注意语句中的空格
-            var reader = db.ExecuteQuery("Select * From" +" "+ "PavementTypeInfo" + " "+"where Idx=" + Index.ToString());
+            var reader = db.ExecuteQuery("Select * From" + " " + "PavementTypeInfo" + " " + "where Idx=" + Index.ToString());
             while (reader.Read())
             {
                 pavementTypeList.Add(new PavementType
-                {                
+                {
                     Id = Convert.ToInt16(reader["Id"]),
                     Index = Convert.ToInt16(reader["Idx"]),
                     Name = Convert.ToString(reader["Name"]),
@@ -104,9 +105,7 @@ namespace Wpf.Dao
 
             for (int i = 0; i < testRouteBaseList.Count(); i++)
             {
-                //查询路面基础信息对应的路面类型信息
-                var pavementType = SelectAllPavementTypeInfo(testRouteBaseList[i].Index);
-                testRouteList.Add(new TestRoute { PavementTypeInfo = pavementType, TestRouteBase = testRouteBaseList[i] });
+                testRouteList.Add(new TestRoute { PavementTypeInfo = SelectAllPavementTypeInfo(testRouteBaseList[i].Index), TestRouteBase = testRouteBaseList[i] });
             }
             return testRouteList;
         }
@@ -125,7 +124,7 @@ namespace Wpf.Dao
         {
             //先修改测试路线基础信息
             db.UpdateInto("TestRouteBaseInfo", new string[] {
-               "Idx" ,"IsChecked","TestRoutes", "LineMileage",
+               "Idx" ,"TestRoutes", "LineMileage",
                     "Material", "Time", "Picture"
             }, new string[] {
                     tr.TestRouteBase.Index.ToString(),
@@ -140,7 +139,7 @@ namespace Wpf.Dao
             for (int i = 0; i < tr.PavementTypeInfo.Count(); i++)
             {
                 db.Update("PavementTypeInfo", new string[]
-                { "Index", "Id", "Name", "Length", "Percent", "Picture" },
+                { "Idx", "Id", "Name", "Length", "Percent", "Picture" },
                     new string[] {
                         tr.PavementTypeInfo[i].Index.ToString(),
                         tr.PavementTypeInfo[i].Id.ToString(),
@@ -153,6 +152,19 @@ namespace Wpf.Dao
                     new string[] {tr.TestRouteBase.Index.ToString(),
                     tr.PavementTypeInfo[i].Id.ToString()
                     });
+                //如果路面类型的ID和IDX都是0说明该路面类型不存在，则是新增路面类型，进行添加
+                if (tr.PavementTypeInfo[i].Index == tr.PavementTypeInfo[i].Id && tr.PavementTypeInfo[i].Id == 0)
+                {
+                    db.InsertInto("PavementTypeInfo", new string[]
+              {  "Idx", "Name", "Length", "Percent", "Picture" },
+              new string[] {
+                         tr.TestRouteBase.Index.ToString(),
+                        tr.PavementTypeInfo[i].Name.ToString(),
+                        tr.PavementTypeInfo[i].Length.ToString(),
+                        tr.PavementTypeInfo[i].Percent.ToString(),
+                        tr.PavementTypeInfo[i].Picture.ToString()
+              });
+                }
             }
         }
 
@@ -187,6 +199,8 @@ namespace Wpf.Dao
                 });
             }
         }
+
+
 
     }
 }

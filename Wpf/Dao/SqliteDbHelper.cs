@@ -165,7 +165,7 @@ namespace Wpf.Dao
             }
             query += " WHERE " + selectkey[0] + " = " + selectvalue[0] + " ";
 
-            for (int i = 1; i < colsvalues.Length; ++i)
+            for (int i = 1; i < selectkey.Length; ++i)
             {
                 query += " and " + selectkey[i] + " = " + selectvalue[i];
             }

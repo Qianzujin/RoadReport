@@ -8,7 +8,7 @@ using Wpf.Model;
 
 namespace Wpf.Dao
 {
-    class CoverDao : ObservableObject
+    class CoverDao 
     {
         Cover cover;
         public CoverDao()

@@ -31,9 +31,11 @@ namespace Wpf
 
         private void AddTestRouteInfo(object sender, RoutedEventArgs e)
         {
-            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "Insert", null);
-            testRouteWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //testRouteViewModel, "Insert", null
+            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel,"Insert");
+            testRouteWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;       
             testRouteWindow.Show();
+            testRouteViewModel.TestRouteMessage(null);
         }
 
         private void SelectTestRouteInfo(object sender, RoutedEventArgs e)
@@ -51,10 +53,11 @@ namespace Wpf
             if (MyVM != null && MyVM.SelectPavementTypeCommand.CanExecute(trb))
                 MyVM.SelectPavementTypeCommand.Execute(trb);
 
-            //显示前更新路面类型数据
-            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel, "Update", trb);
+            //显示前更新路面类型数据//testRouteViewModel, "Update", trb
+            TestRouteWindow testRouteWindow = new TestRouteWindow(testRouteViewModel,"Update");
             testRouteWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             testRouteWindow.Show();
+            testRouteViewModel.TestRouteMessage(trb);
         }
     }
 }

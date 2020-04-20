@@ -9,7 +9,7 @@ using Wpf.Model;
 
 namespace Wpf.Dao
 {
-    class CarDao : ObservableObject
+    class CarDao 
     {
         List<Car> carList = new List<Car>();
         SqliteDbHelper db;//声明连接对象

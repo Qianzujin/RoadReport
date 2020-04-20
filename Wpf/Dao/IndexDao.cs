@@ -8,7 +8,7 @@ using Wpf.Model;
 
 namespace Wpf.Dao
 {
-    class IndexDao : ObservableObject
+    class IndexDao 
     {
         Index index;
         public IndexDao()
