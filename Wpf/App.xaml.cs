@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoongEgg.LoongLogger;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,12 +14,31 @@ namespace Wpf
     /// </summary>
     public partial class App : Application
     {
-       // protected override void OnStartup(StartupEventArgs e)
-       // {
-       //     SplashScreen s = new SplashScreen("./Resources/轮胎.png");
-       //     s.Show(true);
-       //     s.Close(new TimeSpan(0, 0, 3));
-       //     base.OnStartup(e);
-       // }
+        // protected override void OnStartup(StartupEventArgs e)
+        // {
+        //     SplashScreen s = new SplashScreen("./Resources/轮胎.png");
+        //     s.Show(true);
+        //     s.Close(new TimeSpan(0, 0, 3));
+        //     base.OnStartup(e);
+        // }
+
+        public class InitProgram
+        {
+
+            public void Logger()
+            {
+                LoggerManager.Enable(LoggerType.Console | LoggerType.Debug | LoggerType.File, LoggerLevel.Debug);
+                LoggerManager.WriteFatal("THE PROGRAM IS STARTED!");
+            }
+        }
+
+        InitProgram initProgram;
+
+        public App()
+        {
+            initProgram = new InitProgram();
+            initProgram.Logger();
+        }
+
     }
 }

@@ -28,13 +28,15 @@ namespace Wpf
         private TestRouteViewModel testRouteViewModelSelf;
         private string OperationFlag;
 
-
         private List<PavementType> ptInfo = new List<PavementType>();
         private TestRoute trSelf = new TestRoute();
         private TestRouteBase trbSelf = new TestRouteBase();
 
-
-        //TestRouteViewModel testRouteViewModel, string OperationFlag, TestRouteBase trb
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="testRouteViewModel"></param>
+        /// <param name="OperationFlag"></param>
         public TestRouteWindow(TestRouteViewModel testRouteViewModel, string OperationFlag)
         {
             InitializeComponent();
@@ -49,27 +51,14 @@ namespace Wpf
                 }
             };
 
-            //中间窗口和下层窗口解耦问题，暂时想不清楚，放一放
-            // if (OperationFlag == "Update")
-            // {
-            //     this.pavementTypeInfoDataGrid.DataContext = testRouteViewModel;
-            // }
-            // else if (OperationFlag == "Insert")
-            // {
-            //     this.DataContext = testRouteViewModel;
-            //     testRouteViewModel.pavementTypeView.Clear();
-            //     this.trbLineMileage.Text = "";
-            //     this.trbMaterial.Text ="";
-            //     this.trbPicture.Source  = null;
-            //     this.trbTestRoutes.Text = "";
-            //     this.trbTime.Text = "";
-            // }
-            //
             this.testRouteViewModelSelf = testRouteViewModel;
-            // this.trbUpdate = trb;
             this.OperationFlag = OperationFlag;
         }
 
+        /// <summary>
+        /// 通过Messenger发送消息获取TestRoute信息
+        /// </summary>
+        /// <param name="tr">选中的测试路线</param>
         private void TestRouteMessage(TestRoute tr)
         {
             //拷贝tr数据
@@ -87,12 +76,9 @@ namespace Wpf
 
             trSelf = new TestRoute { TestRouteBase = trbSelf, pavementTypeInfo = ptInfo };
 
-
             this.pavementTypeInfoDataGrid.ItemsSource = trSelf.PavementTypeInfo;
             this.DataContext = trSelf;
-
         }
-
 
 
         /// <summary>
@@ -103,7 +89,6 @@ namespace Wpf
         /// <typeparam name="S">数据源实体</typeparam>
         /// <param name="s">数据源实体</param>
         /// <returns>返回的新实体</returns>
-
         public static D Mapper<D, S>(S s)
         {
             D d = Activator.CreateInstance<D>(); //构造新实例
@@ -130,29 +115,35 @@ namespace Wpf
             return d;
         }
 
-
+        /// <summary>
+        /// 最小化窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Min(object sender, MouseButtonEventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 关闭窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Close(object sender, MouseButtonEventArgs e)
         {
             this.Close();
         }
 
-        //编辑
+        /// <summary>
+        /// 编辑按钮 点击DataGrid中的编辑按钮，对路面类型信息进行编辑，记录选中的索引，等待路面类型修改窗
+        /// 口关闭后，对对应的索引值直接赋值
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="ptInfo">存储路面类型信息</param>
         private void EditClick(object sender, RoutedEventArgs e)
         {
-            //获取当前选择路面类型
-            //PavementType pt = this.pavementTypeInfoDataGrid.SelectedItem as PavementType;
-            //int idx = -1;//记录路面类型在私有变量中的位置
-            //for (int i = 0; i < trSelf.PavementTypeInfo.Count(); i++)
-            //{
-            //    if (trSelf.PavementTypeInfo[i] == pt)
-            //    { idx = i; }
-            //}
-
             PavementType pt = this.pavementTypeInfoDataGrid.SelectedItem as PavementType;
             int idx = -1;//记录路面类型在私有变量中的位置
             for (int i = 0; i < ptInfo.Count(); i++)
@@ -166,7 +157,6 @@ namespace Wpf
             pavementTypeWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             pavementTypeWindow.ShowDialog();
 
-
             //当修改当前路面类型时，将修改过的路面类型进行赋值
             if (idx != -1)
             {
@@ -174,28 +164,32 @@ namespace Wpf
                 ptInfo[idx] = pavementTypeWindow.ptSelf;
             }
 
-
-
-            if (OperationFlag == "Update")
-            {
+          //  if (OperationFlag == "Update")
+          //  {
                 //更新当前视图
                 this.pavementTypeInfoDataGrid.ItemsSource = null;
                 this.pavementTypeInfoDataGrid.ItemsSource = ptInfo;
                 // ptList = tr.PavementTypeInfo;
-            }
-            else
-            {
-                //更新当前视图
-                this.pavementTypeInfoDataGrid.ItemsSource = null;
-                this.pavementTypeInfoDataGrid.ItemsSource = trSelf.PavementTypeInfo;
-                ptInfo = trSelf.PavementTypeInfo;
-            }
+           // }
+           // else
+           // {
+           //     //更新当前视图
+           //     this.pavementTypeInfoDataGrid.ItemsSource = null;
+           //     this.pavementTypeInfoDataGrid.ItemsSource = trSelf.PavementTypeInfo;
+           //     ptInfo = trSelf.PavementTypeInfo;
+           // }
             //var MyVM = this.testRouteViewModelSelf;
             //if (MyVM != null && MyVM.UpdatePavementTypeCommand.CanExecute(ptList))
             //    MyVM.UpdatePavementTypeCommand.Execute(ptList);
         }
 
-        //提交 需要判断新增还是编辑
+        /// <summary>
+        /// 提交 需要判断新增还是编辑,通过父窗口传过来的提交测试路线信息还是修改测试路线信息 
+        /// 调用对应的command命令
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="OperationFlag">操作类型</param>
         private void Submit(object sender, RoutedEventArgs e)
         {
 
@@ -221,7 +215,6 @@ namespace Wpf
             }
             else if (OperationFlag == "Update")
             {
-
                 TestRouteBase trb = new TestRouteBase
                 {
                     Index = this.trSelf.TestRouteBase.Index,
@@ -238,7 +231,7 @@ namespace Wpf
                 if (MyVM != null && MyVM.UpdateCommand.CanExecute(tr))
                     MyVM.UpdateCommand.Execute(tr);
             }
-
+            this.Close();
         }
 
         private bool VerifyPavementType(PavementType pt)
@@ -250,19 +243,18 @@ namespace Wpf
             return false;
         }
 
-        //插入一项路面类型
+        /// <summary>
+        /// 插入一条路面类型信息，点击该按钮，会弹窗pavement，填写完整则添加一条路面类型信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Insert(object sender, RoutedEventArgs e)
         {
             //获取增加数据时Index索引
-
-            //当当前操作是插入一条路面类型，首先需要知道该操作是否,必须保证
-            //if (OperationFlag == "Insert")
-            //{
-            //如果是插入则自己产生Index索引，如何告诉下级上级是插入还是更新
             PavementTypeWindow pavementTypeWindow = new PavementTypeWindow(testRouteViewModelSelf, null);
             pavementTypeWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             pavementTypeWindow.ShowDialog();
-            if (pavementTypeWindow.ptSelf != null)
+            if (pavementTypeWindow.ptSelf.Name != null)
             {
                 this.ptInfo.Add(pavementTypeWindow.ptSelf);//获取子窗口pt路面类型信息
             }
@@ -270,40 +262,13 @@ namespace Wpf
             this.pavementTypeInfoDataGrid.ItemsSource = null;
             this.pavementTypeInfoDataGrid.ItemsSource = this.ptInfo;
 
-
-            //更新当前视图
-            //var MyVM = this.testRouteViewModelSelf;
-            //if (MyVM != null && MyVM.UpdatePavementTypeCommand.CanExecute(ptList))
-            //    MyVM.UpdatePavementTypeCommand.Execute(ptList);
-            //}
-            //else if (OperationFlag == "Update")
-            //{
-            //    //获取视图中的路面类型
-            //    foreach (var item in this.testRouteViewModelSelf.pavementTypeView)
-            //    {
-            //        this.ptInfo.Add(item);
-            //    }
-            //    //如果是更新则使用Index
-            //    PavementTypeWindow pavementTypeWindow = new PavementTypeWindow(testRouteViewModelSelf, null);
-            //    pavementTypeWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //    pavementTypeWindow.ShowDialog();
-            //    if (pavementTypeWindow.ptSelf != null)
-            //    {
-            //        this.ptInfo.Add(pavementTypeWindow.ptSelf);//获取子窗口pt路面类型信息
-            //    }
-            //
-            //
-            //    this.pavementTypeInfoDataGrid.ItemsSource = null;
-            //    this.pavementTypeInfoDataGrid.ItemsSource = this.ptInfo;
-            //
-            //    //更新当前视图
-            //    //var MyVM = this.testRouteViewModelSelf;
-            //    //if (MyVM != null && MyVM.UpdatePavementTypeCommand.CanExecute(ptInfo))
-            //    //    MyVM.UpdatePavementTypeCommand.Execute(ptInfo);
-            //}
-
         }
 
+        /// <summary>
+        /// 加载图片
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadImage(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -330,6 +295,12 @@ namespace Wpf
             }
         }
 
+        /// <summary>
+        /// 删除按钮
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        /// <param name="ptInfo">存储路面类型信息</param>
         private void DeleteClick(object sender, RoutedEventArgs e)
         {
             PavementType pavementType = this.pavementTypeInfoDataGrid.SelectedItem as PavementType;

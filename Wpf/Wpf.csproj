@@ -73,6 +73,10 @@
       <HintPath>..\packages\MvvmLightLibs.5.4.1.1\lib\net45\GalaSoft.MvvmLight.Platform.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="LoongEgg.LoongLogger, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Dll\LoongEgg.LoongLogger.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.2.3.1244, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.2.3\lib\net45\MaterialDesignColors.dll</HintPath>
       <Private>True</Private>
@@ -267,6 +271,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dll\LoongEgg.LoongLogger.dll" />
     <Content Include="Dll\System.Data.SQLite.dll" />
     <Resource Include="Resources\Picture\1.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

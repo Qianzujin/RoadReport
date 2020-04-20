@@ -25,9 +25,7 @@ namespace Wpf
     /// </summary>
     public partial class PavementTypeWindow : Window
     {
-        //private TestRouteViewModel testRouteViewModelSelf;
         public PavementType ptSelf= new PavementType();
-        //private PavementType ptSelf = new PavementType();
         private PavementType pt = new PavementType(); 
 
         public PavementTypeWindow(TestRouteViewModel testRouteViewModel,PavementType pts)
@@ -50,7 +48,6 @@ namespace Wpf
             else {
                 this.DataContext = this.ptSelf;
             }
-
         }
 
         private void Min(object sender, MouseButtonEventArgs e)
@@ -60,33 +57,12 @@ namespace Wpf
 
         private void Close(object sender, MouseButtonEventArgs e)
         {
-
             ptSelf = this.pt;
             this.Close();
         }
 
         private void Submit(object sender, RoutedEventArgs e)
         {
-            //获取当前操作属性
-            //获取当前操作对象 Index
-            //获取当前的值
-            // pt = new PavementType
-            // {
-            //     Id = 0,
-            //     Index = 0,
-            //     Name = this.ptName.Text,
-            //     Length = this.ptLength.Text,
-            //     Percent = this.ptPercent.Text,
-            //     Picture = this.ptPicture.Source as BitmapImage
-            // };
-
-            //this.pt.Index = ptSelf.Index;
-            //this.pt.Id = ptSelf.Id;
-            //this.pt.Name = this.ptName.Text;
-            //this.pt.Length = this.ptLength.Text;
-            //this.pt.Percent = this.ptPercent.Text;
-            //this.pt.Picture = this.ptPicture.Source as BitmapImage;
-
             this.Close();
         }
 
@@ -117,8 +93,6 @@ namespace Wpf
             }
         }
 
-
-
         /// <summary>
         /// 反射实现两个类的对象之间相同属性的值的复制
         /// 适用于初始化新实体
@@ -127,7 +101,6 @@ namespace Wpf
         /// <typeparam name="S">数据源实体</typeparam>
         /// <param name="s">数据源实体</param>
         /// <returns>返回的新实体</returns>
-
         public static D Mapper<D, S>(S s)
         {
             D d = Activator.CreateInstance<D>(); //构造新实例

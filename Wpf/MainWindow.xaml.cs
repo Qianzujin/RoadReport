@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoongEgg.LoongLogger;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -29,8 +30,6 @@ namespace Wpf
         CarInfoPage carInfoPage;
         TestRouteInfoPage testRouteInfoPage;
 
-
-
         public MainWindow()
         {
             //LoginWindow loginWindow = new LoginWindow();
@@ -41,6 +40,15 @@ namespace Wpf
             //    MessageBox.Show("登陆失败！");
             //    Application.Current.Shutdown();
             //}
+
+
+
+
+            // 注销
+           LoggerManager.Disable();
+
+            //LoggerManager.WriteError("Is Logger cleared?");
+
 
             InitializeComponent();
             this.MouseLeftButtonDown += (render, e) =>
@@ -101,7 +109,7 @@ namespace Wpf
             }
             else if (this.SheetMenuListBox.SelectedIndex == 4)
             {
-                this.Change_Page.NavigationService.Navigate(equipmentInfoPage);   
+                this.Change_Page.NavigationService.Navigate(equipmentInfoPage);
             }
             else if (this.SheetMenuListBox.SelectedIndex == 5)
             {
@@ -135,7 +143,8 @@ namespace Wpf
             {
                 this.WindowState = WindowState.Maximized;
             }
-            else {
+            else
+            {
                 this.WindowState = WindowState.Normal;
             }
         }
@@ -154,7 +163,7 @@ namespace Wpf
             CoverViewModel coverViewModel = new CoverViewModel();
 
             string i = indexViewModel.test() + coverViewModel.test();
-            MessageBox.Show(i);    
+            MessageBox.Show(i);
         }
     }
 }

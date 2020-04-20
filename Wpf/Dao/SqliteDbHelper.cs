@@ -31,6 +31,7 @@ namespace Wpf.Dao
             OpenDB(connectionString);
             Console.WriteLine(connectionString);
         }
+
         public void OpenDB(string connectionString)
         {
             try
@@ -45,6 +46,7 @@ namespace Wpf.Dao
                 Console.WriteLine(temp1);
             }
         }
+
         /// <summary>
         /// 关闭连接
         /// </summary>
@@ -67,6 +69,7 @@ namespace Wpf.Dao
             dbConnection = null;
             Console.WriteLine("Disconnected from db.");
         }
+
         /// <summary>
         /// 执行查询sqlite语句操作
         /// </summary>
@@ -79,6 +82,7 @@ namespace Wpf.Dao
             reader = dbCommand.ExecuteReader();
             return reader;
         }
+
         public string ExecuteQueryLastIdx()  
         {
             string sqlQuery;
@@ -88,6 +92,7 @@ namespace Wpf.Dao
             var i = dbCommand.ExecuteScalar();
             return i.ToString();
         }
+
         /// <summary>
         /// 查询该表所有数据
         /// </summary>
@@ -98,6 +103,7 @@ namespace Wpf.Dao
             string query = "SELECT * FROM " + tableName;
             return ExecuteQuery(query);
         }
+
         /// <summary>
         /// 动态添加表字段到指定表
         /// </summary>
@@ -121,9 +127,7 @@ namespace Wpf.Dao
             query += ")";
             return ExecuteQuery(query);
            
-        }
-
-     
+        }     
 
         /// <summary>
         /// 动态更新表结构
@@ -171,6 +175,7 @@ namespace Wpf.Dao
             }
             return ExecuteQuery(query);
         }
+
         /// <summary>
         /// 动态删除指定表字段数据
         /// </summary>
@@ -188,6 +193,7 @@ namespace Wpf.Dao
             Console.WriteLine(query);
             return ExecuteQuery(query);
         }
+
         /// <summary>
         /// 动态添加数据到指定表
         /// </summary>
@@ -225,6 +231,7 @@ namespace Wpf.Dao
             string query = "DELETE FROM " + tableName;
             return ExecuteQuery(query);
         }
+
         /// <summary>
         /// 动态创建表
         /// </summary>
@@ -247,6 +254,7 @@ namespace Wpf.Dao
             Console.WriteLine(query);
             return ExecuteQuery(query);
         }
+
         /// <summary>
         /// 根据查询条件 动态查询数据信息
         /// </summary>
