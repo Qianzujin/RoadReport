@@ -234,6 +234,11 @@ namespace Wpf
             this.Close();
         }
 
+        /// <summary>
+        /// 验证数据
+        /// </summary>
+        /// <param name="pt"></param>
+        /// <returns></returns>
         private bool VerifyPavementType(PavementType pt)
         {
             if (pt != null)

@@ -41,15 +41,6 @@ namespace Wpf
             //    Application.Current.Shutdown();
             //}
 
-
-
-
-            // 注销
-           LoggerManager.Disable();
-
-            //LoggerManager.WriteError("Is Logger cleared?");
-
-
             InitializeComponent();
             this.MouseLeftButtonDown += (render, e) =>
             {
@@ -72,8 +63,10 @@ namespace Wpf
             this.SheetMenuListBox.ItemsSource = menuNameList;
             InitPage();
         }
-
-        //菜单栏类
+        
+        /// <summary>
+        /// 菜单栏类
+        /// </summary>
         public class MenuName
         {
             public int Index { get; set; }
@@ -81,8 +74,9 @@ namespace Wpf
             public string SheetName { get; set; }
         }
 
-
-        //初始化页面
+        /// <summary>
+        /// 初始化页面
+        /// </summary>
         public void InitPage()
         {
             indexInfoPage = new IndexInfoPage();
@@ -91,9 +85,12 @@ namespace Wpf
             carInfoPage = new CarInfoPage();
             testRouteInfoPage = new TestRouteInfoPage();
         }
-
-
-        //选择操作步
+        
+        /// <summary>
+        /// 选择操作步
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelSheetMenu(object sender, SelectionChangedEventArgs e)
         {
             this.home.Visibility = Visibility.Hidden;
@@ -120,14 +117,22 @@ namespace Wpf
                 this.Change_Page.NavigationService.Navigate(testRouteInfoPage);
             }
         }
-
-        //结束程序
+    
+        /// <summary>
+        /// 结束程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Close(object sender, MouseButtonEventArgs e)
         {
             Application.Current.Shutdown();
         }
 
-        //最小化窗口
+        /// <summary>
+        /// 最小化程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Min(object sender, MouseButtonEventArgs e)
         {
             if (this.WindowState != WindowState.Minimized)
@@ -136,7 +141,11 @@ namespace Wpf
             }
         }
 
-        //最大化窗口
+        /// <summary>
+        /// 最大化窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Max(object sender, MouseButtonEventArgs e)
         {
             if (this.WindowState != WindowState.Maximized)
@@ -148,8 +157,12 @@ namespace Wpf
                 this.WindowState = WindowState.Normal;
             }
         }
-
-        //主页
+        
+        /// <summary>
+        /// 主页
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void GoHome(object sender, MouseButtonEventArgs e)
         {
             this.Change_Page.Visibility = Visibility.Hidden;

@@ -22,22 +22,11 @@ namespace Wpf
         //     base.OnStartup(e);
         // }
 
-        public class InitProgram
-        {
-
-            public void Logger()
-            {
-                LoggerManager.Enable(LoggerType.Console | LoggerType.Debug | LoggerType.File, LoggerLevel.Debug);
-                LoggerManager.WriteFatal("THE PROGRAM IS STARTED!");
-            }
-        }
-
-        InitProgram initProgram;
 
         public App()
         {
-            initProgram = new InitProgram();
-            initProgram.Logger();
+            LoggerManager.Enable(LoggerType.Console | LoggerType.Debug | LoggerType.File, LoggerLevel.Debug);
+            LoggerManager.WriteFatal("ＴＨＥ　ＰＲＯＧＲＡＭ　ＩＳ　ＳＴＡＲＴ");
         }
 
     }

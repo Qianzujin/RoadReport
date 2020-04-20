@@ -8,6 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace Wpf.Model
 {
+    /// <summary>
+    /// /车辆信息类
+    /// </summary>
     public class Car : ObservableObject
     {
         public int Index { get; set; }//索引

@@ -8,6 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace Wpf.Model
 {
+    /// <summary>
+    /// 仪器信息类
+    /// </summary>
     public class Equipment : ObservableObject
     {
         public int Index { get; set; }//索引

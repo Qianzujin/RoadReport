@@ -25,13 +25,20 @@ namespace Wpf
     {
         EquipmentViewModel equipmentViewModel = new EquipmentViewModel();
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public EquipmentInfoPage()
         {
             InitializeComponent();
             this.DataContext = equipmentViewModel;
         }
 
-        //编辑仪器数据
+        /// <summary>
+        /// 编辑仪器信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditClick(object sender, RoutedEventArgs e)
         {
             //获取当前数据传给修改窗口
@@ -42,14 +49,22 @@ namespace Wpf
             equipmentWindow.Show();
         }
 
-        //触发combobox按键事件，填充下拉列表数据为仪器名称数据
+        /// <summary>
+        /// 触发combobox按键事件，填充下拉列表数据为仪器名称数据
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void equNameKeyUp(object sender, KeyEventArgs e)
         {
             var namelist = equipmentViewModel.EquipmentView.Select(t => t.Name).ToList();
             filterKeyUp(this.equName, namelist);
         }
-
-        //仪器编号筛选
+        
+        /// <summary>
+        /// 仪器编号筛选
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void equCodeKeyUp(object sender, KeyEventArgs e)
         {
             var codeList = equipmentViewModel.EquipmentView.Select(t => t.Code).ToList();
@@ -64,7 +79,11 @@ namespace Wpf
         }
         */
 
-        //筛选通用方法
+        /// <summary>
+        /// 筛选通用方法
+        /// </summary>
+        /// <param name="itemCombobox"></param>
+        /// <param name="itemList"></param>
         private void filterKeyUp(ComboBox itemCombobox, List<string> itemList)
         {
             List<string> sourcesList = new List<string>();
@@ -82,8 +101,12 @@ namespace Wpf
             itemCombobox.ItemsSource = sourcesList;
             itemCombobox.IsDropDownOpen = true;
         }
-
-        //查询仪器信息
+        
+        /// <summary>
+        /// 查询仪器信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectEquInfo(object sender, RoutedEventArgs e)
         {
             //触发Command更新数据，必须使用同一个视图数据模型
@@ -95,7 +118,11 @@ namespace Wpf
                 MyVM.SelectCommand.Execute(filterList);
         }
 
-        //新增信息
+        /// <summary>
+        /// 增加仪器信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddEquInfo(object sender, RoutedEventArgs e)
         {
             //获取当前数据传给修改窗口

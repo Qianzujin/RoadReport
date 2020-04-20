@@ -1,4 +1,5 @@
-﻿using System;
+﻿using LoongEgg.LoongLogger;
+using System;
 using System.Collections.Generic;
 using System.Data.SQLite;
 using System.Diagnostics;
@@ -26,6 +27,8 @@ namespace Wpf.Dao
         /// 数据库的连接字符串，用于建立与特定数据源的连接
         /// </summary>
         /// <param name="connectionString">数据库的连接字符串，用于建立与特定数据源的连接</param>
+        /// 
+
         public SqliteDbHelper(string connectionString)
         {
             OpenDB(connectionString);
@@ -125,9 +128,9 @@ namespace Wpf.Dao
                 query += ", '" + values[i]+"'";
             }
             query += ")";
-            return ExecuteQuery(query);
-           
-        }     
+            LoggerManager.WriteFatal(query);
+            return ExecuteQuery(query); 
+        }
 
         /// <summary>
         /// 动态更新表结构
@@ -147,6 +150,7 @@ namespace Wpf.Dao
                 query += ", " + cols[i] + " =" + "'" + colsvalues[i] + "'";
             }
             query += " WHERE " + selectkey + " = " + selectvalue + " ";
+            LoggerManager.WriteFatal(query);
             return ExecuteQuery(query);
         }
 
@@ -173,6 +177,7 @@ namespace Wpf.Dao
             {
                 query += " and " + selectkey[i] + " = " + selectvalue[i];
             }
+            LoggerManager.WriteFatal(query);
             return ExecuteQuery(query);
         }
 
@@ -190,7 +195,8 @@ namespace Wpf.Dao
             {
                 query += " or " + cols + " = " + colsvalues;
             }
-            Console.WriteLine(query);
+           // Console.WriteLine(query);
+            LoggerManager.WriteFatal(query);
             return ExecuteQuery(query);
         }
 
@@ -219,6 +225,7 @@ namespace Wpf.Dao
                 query += ", " + values;
             }
             query += ")";
+            LoggerManager.WriteFatal(query);
             return ExecuteQuery(query);
         }
         /// <summary>
@@ -252,6 +259,7 @@ namespace Wpf.Dao
             }
             query += ")";
             Console.WriteLine(query);
+            LoggerManager.WriteFatal(query);
             return ExecuteQuery(query);
         }
 

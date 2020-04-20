@@ -25,13 +25,18 @@ namespace Wpf
     public partial class EquipmentWindow : Window
     {
         //获取父窗口视图模型对象
-        EquipmentViewModel equipmentViewModelSelf = new EquipmentViewModel();
+        EquipmentViewModel equipmentViewModelSelf;
         //本窗口视图模型对象
         Equipment equSelf; 
         //操作标志
         string operationFlag;
 
-        //有参构造
+        /// <summary>
+        /// 有参构造
+        /// </summary>
+        /// <param name="equipmentViewModel"></param>
+        /// <param name="OperationFlag"></param>
+        /// <param name="equ"></param>
         public EquipmentWindow(EquipmentViewModel equipmentViewModel, string OperationFlag, Equipment equ)
         {
             InitializeComponent();
@@ -48,18 +53,26 @@ namespace Wpf
                 this.equSelf = equ;
                 this.DataContext = equ;
             }
-            
+            equipmentViewModelSelf = new EquipmentViewModel();
             this.equipmentViewModelSelf = equipmentViewModel;
             this.operationFlag = OperationFlag;
         }
 
-        //关闭当前窗口
+        /// <summary>
+        /// 关闭当前窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Close(object sender, MouseButtonEventArgs e)
         {
             this.Close();
         }
 
-        //最小化当前窗口
+        /// <summary>
+        /// 最小化当前窗口
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Min(object sender, MouseButtonEventArgs e)
         {
             if (this.WindowState != WindowState.Minimized)
@@ -68,7 +81,11 @@ namespace Wpf
             }
         }
 
-        //修改图片信息,将图片复制到相对路径下，如果存在则弹窗不复制，反之则复制
+        /// <summary>
+        /// 修改图片信息,将图片复制到相对路径下，如果存在则弹窗不复制，反之则复制
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void LoadImage(object sender, RoutedEventArgs e)
         {
             OpenFileDialog fileDialog = new OpenFileDialog();
@@ -96,7 +113,11 @@ namespace Wpf
 
         }
 
-        //提交修改信息
+        /// <summary>
+        /// 修改提交信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Submit(object sender, RoutedEventArgs e)
         {
             //对数据进行校验

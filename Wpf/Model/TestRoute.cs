@@ -8,7 +8,9 @@ using System.Windows.Media.Imaging;
 
 namespace Wpf.Model
 {
-    //路面类型
+    /// <summary>
+    /// /路面类型类
+    /// </summary>
     public class PavementType : ObservableObject
     {
         public int Id { get; set; } //是否选中

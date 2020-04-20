@@ -14,7 +14,9 @@ namespace Wpf.Dao
         List<Car> carList = new List<Car>();
         SqliteDbHelper db;//声明连接对象
 
-        //建表语句
+        /// <summary>
+        /// 建表语句
+        /// </summary>
         private void CreateTable()
         {
             db.CreateTable("CarInfo",
@@ -27,20 +29,28 @@ namespace Wpf.Dao
             "TEXT","TEXT","TEXT","DATETIME","INT", "TEXT"
             });
         }
-
-        //客户端连接串进行连接
+        
+        /// <summary>
+        /// 客户端连接串进行连接
+        /// </summary>
         public void CreateClient()
         {
             db = new SqliteDbHelper("Data Source=./sqlite.db;Version=3");
         }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public CarDao()
         {
             CreateClient();
             //CreateTable();
         }
-
-        //查询所有数据
+        
+        /// <summary>
+        /// 查询所有数据
+        /// </summary>
+        /// <returns></returns>
         public List<Car> SelectAll()
         {
             carList.Clear();
@@ -70,8 +80,11 @@ namespace Wpf.Dao
             }
             return carList;
         }
-
-        //插入   注意：时间插入时需要car.BuyingTime.ToString("s")后面加s
+        
+        /// <summary>
+        /// 插入车辆信息  注意：时间插入时需要car.BuyingTime.ToString("s")后面加s
+        /// </summary>
+        /// <param name="car"></param>
         public void Insert(Car car)
         {
             db.InsertInto(
@@ -95,8 +108,11 @@ namespace Wpf.Dao
                     car.Picture.ToString()
                 });
         }
-
-        //修改
+        
+        /// <summary>
+        /// 修改车辆信息
+        /// </summary>
+        /// <param name="car"></param>
         public void Update(Car car)
         {
             db.UpdateInto(
@@ -122,12 +138,14 @@ namespace Wpf.Dao
                 }, "Idx", car.Index.ToString());
         }
 
-        //删除
+        /// <summary>
+        /// 删除车辆信息
+        /// </summary>
+        /// <param name="Index"></param>
         public void Delete(int Index)
         {
             db.Delete("CarInfo", new string[] { "Idx" }, new string[] { Index.ToString() });
         }
-
 
     }
 }

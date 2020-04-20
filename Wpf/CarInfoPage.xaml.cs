@@ -25,13 +25,20 @@ namespace Wpf
     {
         CarViewModel carViewModel = new CarViewModel();
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public CarInfoPage()
         {
             InitializeComponent();
             this.DataContext = carViewModel;
         }
-
-        //筛选通用方法
+      
+        /// <summary>
+        /// 筛选通用方法
+        /// </summary>
+        /// <param name="itemCombobox"></param>
+        /// <param name="itemList"></param>
         private void filterKeyUp(ComboBox itemCombobox, List<string> itemList)
         {
             List<string> sourcesList = new List<string>();
@@ -50,6 +57,11 @@ namespace Wpf
             itemCombobox.IsDropDownOpen = true;
         }
 
+        /// <summary>
+        /// 编辑车辆信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditClick(object sender, RoutedEventArgs e)
         {
             //获取当前数据传给修改窗口
@@ -59,6 +71,11 @@ namespace Wpf
             carWindow.Show();
         }
 
+        /// <summary>
+        /// 根据筛选条件筛选车辆信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectCarInfo(object sender, RoutedEventArgs e)
         {
             //触发Command更新数据，必须使用同一个视图数据模型
@@ -70,6 +87,11 @@ namespace Wpf
                 MyVM.SelectCommand.Execute(filterList);
         }
 
+        /// <summary>
+        /// 增加车辆信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddCarInfo(object sender, RoutedEventArgs e)
         {
             CarWindow carWindow = new CarWindow(carViewModel, "Insert",null);
@@ -77,12 +99,22 @@ namespace Wpf
             carWindow.Show();
         }
 
+        /// <summary>
+        /// 当键盘抬起时触发车辆类型输入框的内容刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void carTypeKeyUp(object sender, KeyEventArgs e)
         {
             var typeList = carViewModel.CarView.Select(t => t.Type).ToList();
             filterKeyUp(this.carType, typeList);
         }
 
+        /// <summary>
+        /// 当键盘抬起时触发车辆牌号输入框的内容刷新
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void carNumberKeyUp(object sender, KeyEventArgs e)
         {
             var numberList = carViewModel.CarView.Select(t => t.CarNumber).ToList();

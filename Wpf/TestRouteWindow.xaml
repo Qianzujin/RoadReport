@@ -43,7 +43,7 @@
                         <DataGridTemplateColumn Width="*" Header="路面图片">
                             <DataGridTemplateColumn.CellTemplate>
                                 <DataTemplate>
-                                    <Image Source="{Binding Picture,Mode=TwoWay}"></Image>
+                                    <Image Source="{Binding Picture}"></Image>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
