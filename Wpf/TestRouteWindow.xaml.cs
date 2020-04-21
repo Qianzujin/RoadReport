@@ -198,6 +198,16 @@ namespace Wpf
                 MessageBox.Show("请检查数据格式！");
                 return;
             }
+
+            //确认提交
+            OKWindow okWindow = new OKWindow("提交数据", "确实要提交这条数据吗？");
+            okWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            okWindow.ShowDialog();
+            if (okWindow.Ret == false)
+            {
+                return;
+            }
+
             //再执行相关操作
             if (OperationFlag == "Insert")
             {

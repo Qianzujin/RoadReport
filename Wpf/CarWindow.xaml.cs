@@ -151,7 +151,7 @@ namespace Wpf
                         car.Index = this.carSelf.Index;
                         var MyVM = carViewModelSelf;
 
-                        OKWindow okWindow = new OKWindow("修改数据", "确实要修改这条数据吗？");
+                        OKWindow okWindow = new OKWindow("提交数据", "确实要提交这条数据吗？");
                         okWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
                         okWindow.ShowDialog();
                         if (okWindow.Ret == true)

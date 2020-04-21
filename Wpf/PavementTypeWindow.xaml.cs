@@ -69,9 +69,19 @@ namespace Wpf
         /// <param name="e"></param>
         private void Submit(object sender, RoutedEventArgs e)
         {
+
             if (Verify() == true)
             {
-                this.Close();
+                OKWindow okWindow = new OKWindow("提交数据", "确实要提交这条数据吗？");
+                okWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                okWindow.ShowDialog();
+                if (okWindow.Ret == true)
+                {
+                    this.Close();
+                }
+                else {
+                    return;
+                }
             }
             else
             {

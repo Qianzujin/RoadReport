@@ -123,7 +123,7 @@
     <Compile Include="Dao\CoverDao.cs" />
     <Compile Include="Dao\EquipmentDao.cs" />
     <Compile Include="Dao\IndexDao.cs" />
-    <Compile Include="Dao\SqliteDbHelper.cs" />
+    <Compile Include="Tool\SqliteDbHelper.cs" />
     <Compile Include="Dao\TestRouteDao.cs" />
     <Compile Include="EquipmentInfoPage.xaml.cs">
       <DependentUpon>EquipmentInfoPage.xaml</DependentUpon>
