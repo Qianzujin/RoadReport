@@ -10,14 +10,14 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80">
+            <RowDefinition Height="60">
             </RowDefinition>
             <RowDefinition Height="*">
             </RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <StackPanel Orientation="Horizontal">
-                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Margin="20 10 0 0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="用户名"></Label>
                     <ComboBox  Name="carType" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" >
                     </ComboBox>
@@ -25,7 +25,7 @@
             </StackPanel>
         </Grid>
         <Grid  Grid.Row="1">
-            <DataGrid Name="testRouteDataGrid" Grid.Row="1" Margin="30"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding TestRouteBaseView }">
+            <DataGrid Name="testRouteDataGrid" Grid.Row="1" Margin="10"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding TestRouteBaseView }">
                 <DataGrid.Columns>
                     <DataGridTextColumn  IsReadOnly="True" Width="*" Header="用户名" Binding="{Binding TestRoutes}"></DataGridTextColumn>
                     <DataGridTextColumn IsReadOnly="True" Width="*"  Header="用户密码" Binding="{Binding LineMileage }"></DataGridTextColumn>

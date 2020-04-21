@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80">
+            <RowDefinition Height="60">
             </RowDefinition>
             <RowDefinition Height="*">
             </RowDefinition>
@@ -18,25 +18,25 @@
         <Grid Grid.Row="0">
 
             <StackPanel Orientation="Horizontal">
-                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Margin="20 10 0 0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="车型"></Label>
                     <ComboBox  Name="carType" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="carTypeKeyUp">
                     </ComboBox>
                 </StackPanel>
 
-                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Margin="20 10 0 0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="车辆号牌"></Label>
                     <ComboBox Name="carNumber" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="carNumberKeyUp">
                     </ComboBox>
                 </StackPanel>
           
-                <Button Margin="30 0 0 0" Click="SelectCarInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
-                <Button Margin="20 0 0 0" Click="AddCarInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
+                <Button Margin="30 10 0 0" Click="SelectCarInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
+                <Button Margin="20 10 0 0" Click="AddCarInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
 
             </StackPanel>
 
         </Grid>
-        <DataGrid Name="carDataGrid" Grid.Row="1" Margin="30"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding CarView }">
+        <DataGrid Name="carDataGrid" Grid.Row="1" Margin="10"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding CarView }">
             <DataGrid.Columns>
                 <DataGridTextColumn  IsReadOnly="True" Width="*" Header="车型" Binding="{Binding Type }"></DataGridTextColumn>
                 <DataGridTextColumn IsReadOnly="True" Width="*"  Header="车辆号牌" Binding="{Binding CarNumber}"></DataGridTextColumn>

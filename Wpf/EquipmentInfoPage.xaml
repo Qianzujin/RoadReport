@@ -10,21 +10,21 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80">
+            <RowDefinition Height="60">
             </RowDefinition>
             <RowDefinition Height="*">
             </RowDefinition>
         </Grid.RowDefinitions>
-        <Grid Grid.Row="0">
-            
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+        <Grid Grid.Row="0" >
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Margin="20 10 0 0" Orientation="Horizontal" >
                     <Label Content="仪器名称"></Label>
                     <ComboBox  Name="equName" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="equNameKeyUp">
                     </ComboBox>
                 </StackPanel>
 
-                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Margin="20 10 0 0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="仪器编号"></Label>
                     <ComboBox Name="equCode" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" KeyUp="equCodeKeyUp">
                     </ComboBox>
@@ -36,13 +36,13 @@
                      </ComboBox>
                      </StackPanel>
                 -->
-                <Button Margin="30 0 0 0" Click="SelectEquInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
-                <Button Margin="20 0 0 0" Click="AddEquInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
+                <Button Margin="30 10 0 0" Click="SelectEquInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
+                <Button Margin="20 10 0 0" Click="AddEquInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
 
             </StackPanel>
 
         </Grid>
-        <DataGrid Name="equipmentDataGrid" Grid.Row="1" Margin="30"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding EquipmentView }">
+        <DataGrid Name="equipmentDataGrid" Grid.Row="1" Margin="10"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding EquipmentView }">
             <DataGrid.Columns>
                 <DataGridTextColumn  IsReadOnly="True" Width="*" Header="仪器名称" Binding="{Binding Name }"></DataGridTextColumn>
                 <DataGridTextColumn IsReadOnly="True" Width="*"  Header="仪器编号" Binding="{Binding Code}"></DataGridTextColumn>

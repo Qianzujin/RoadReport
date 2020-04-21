@@ -10,7 +10,7 @@
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="80">
+            <RowDefinition Height="60">
             </RowDefinition>
             <RowDefinition Height="*">
             </RowDefinition>
@@ -18,19 +18,19 @@
         <Grid Grid.Row="0">
 
             <StackPanel Orientation="Horizontal">
-                <StackPanel Margin="20 0 0 0" Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel Margin="20 10 0 0" Orientation="Horizontal" VerticalAlignment="Center">
                     <Label Content="试验路线"></Label>
                     <ComboBox  Name="carType" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" >
                     </ComboBox>
                 </StackPanel>
 
-                <Button Margin="30 0 0 0" Click="SelectTestRouteInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
-                <Button Margin="20 0 0 0" Click="AddTestRouteInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
+                <Button Margin="30 10 0 0" Click="SelectTestRouteInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
+                <Button Margin="20 10 0 0" Click="AddTestRouteInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
 
             </StackPanel>
 
         </Grid>
-        <DataGrid Name="testRouteDataGrid" Grid.Row="1" Margin="30"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding TestRouteBaseView }">
+        <DataGrid Name="testRouteDataGrid" Grid.Row="1" Margin="10"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding TestRouteBaseView }">
             <DataGrid.Columns>
                 <DataGridTextColumn  IsReadOnly="True" Width="*" Header="试验路线" Binding="{Binding TestRoutes}"></DataGridTextColumn>
                 <DataGridTextColumn IsReadOnly="True" Width="*"  Header="试验里程" Binding="{Binding LineMileage }"></DataGridTextColumn>
