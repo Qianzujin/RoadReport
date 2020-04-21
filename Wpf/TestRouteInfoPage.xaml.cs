@@ -29,6 +29,11 @@ namespace Wpf
             this.DataContext = testRouteViewModel;
         }
 
+        /// <summary>
+        /// 增加试验路线信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddTestRouteInfo(object sender, RoutedEventArgs e)
         {
             //testRouteViewModel, "Insert", null
@@ -38,11 +43,21 @@ namespace Wpf
             testRouteViewModel.TestRouteMessage(null);
         }
 
+        /// <summary>
+        /// 选择试验路线信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SelectTestRouteInfo(object sender, RoutedEventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// 编辑试验路线信息
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void EditClick(object sender, RoutedEventArgs e)
         {
             //获取当前数据传给修改窗口

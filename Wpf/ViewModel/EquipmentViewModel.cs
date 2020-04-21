@@ -99,7 +99,7 @@ namespace Wpf.ViewModel
 
         private void Select(List<string> filterList)
         {
-            equipmentViewList = equipmentDao.SelectAllEquipment();
+            equipmentViewList = equipmentDao.SelectAll();
             var retList = equipmentViewList.Where(a => a.Name.Contains(filterList[0]) && a.Code.Contains(filterList[1])).ToList();
             equipmentViewList = retList;
             UpdateViewData();

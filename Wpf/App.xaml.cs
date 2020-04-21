@@ -14,13 +14,7 @@ namespace Wpf
     /// </summary>
     public partial class App : Application
     {
-        // protected override void OnStartup(StartupEventArgs e)
-        // {
-        //     SplashScreen s = new SplashScreen("./Resources/轮胎.png");
-        //     s.Show(true);
-        //     s.Close(new TimeSpan(0, 0, 3));
-        //     base.OnStartup(e);
-        // }
+
 
 
         public App()

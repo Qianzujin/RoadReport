@@ -25,10 +25,10 @@ namespace Wpf
     /// </summary>
     public partial class PavementTypeWindow : Window
     {
-        public PavementType ptSelf= new PavementType();
-        private PavementType pt = new PavementType(); 
+        public PavementType ptSelf = new PavementType();
+        private PavementType pt = new PavementType();
 
-        public PavementTypeWindow(TestRouteViewModel testRouteViewModel,PavementType pts)
+        public PavementTypeWindow(TestRouteViewModel testRouteViewModel, PavementType pts)
         {
             InitializeComponent();
             this.MouseLeftButtonDown += (sender, e) =>
@@ -45,7 +45,8 @@ namespace Wpf
                 this.DataContext = this.ptSelf;
                 this.pt = pts;
             }
-            else {
+            else
+            {
                 this.DataContext = this.ptSelf;
             }
         }
@@ -68,7 +69,15 @@ namespace Wpf
         /// <param name="e"></param>
         private void Submit(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            if (Verify() == true)
+            {
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("请检查数据格式！");
+            }
+
         }
 
         /// <summary>
@@ -135,6 +144,26 @@ namespace Wpf
                 throw ex;
             }
             return d;
+        }
+
+        /// <summary>
+        /// 数据校验
+        /// </summary>
+        /// <returns></returns>
+        private bool Verify()
+        {
+            if (this.ptName.Text != "" &&
+                this.ptLength.Text != "" &&
+                this.ptPercent.Text != "" &&
+                this.ptPicture.Source != null &&
+                this.ptPicture.Source.ToString() != "" )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
     }

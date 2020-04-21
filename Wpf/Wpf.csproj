@@ -138,6 +138,7 @@
     <Compile Include="Model\Equipment.cs" />
     <Compile Include="Model\Index.cs" />
     <Compile Include="Model\TestRoute.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="OKWindow.xaml.cs">
       <DependentUpon>OKWindow.xaml</DependentUpon>
     </Compile>
@@ -149,6 +150,10 @@
     </Compile>
     <Compile Include="TestRouteWindow.xaml.cs">
       <DependentUpon>TestRouteWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Tool\HelperClass.cs" />
+    <Compile Include="UserInfoPage.xaml.cs">
+      <DependentUpon>UserInfoPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CarViewModel.cs" />
     <Compile Include="ViewModel\CoverViewModel.cs" />
@@ -224,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TestRouteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserInfoPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

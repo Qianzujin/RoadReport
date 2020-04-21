@@ -23,25 +23,23 @@ namespace Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
-        //声明Page
+        //
+        /// <summary>
+        /// 声明Page
+        /// </summary>
         IndexInfoPage indexInfoPage;
         CoverInfoPage coverInfoPage;
         EquipmentInfoPage equipmentInfoPage;
         CarInfoPage carInfoPage;
         TestRouteInfoPage testRouteInfoPage;
+        UserInfoPage userInfoPage;
 
         public MainWindow()
         {
-            //LoginWindow loginWindow = new LoginWindow();
-            //loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            //loginWindow.ShowDialog();
-            //if (loginWindow.isLogin == false)
-            //{
-            //    MessageBox.Show("登陆失败！");
-            //    Application.Current.Shutdown();
-            //}
 
             InitializeComponent();
+            Login();
+
             this.MouseLeftButtonDown += (render, e) =>
             {
                 if (e.ButtonState == MouseButtonState.Pressed)
@@ -59,11 +57,33 @@ namespace Wpf
             menuNameList.Add(new MenuName { Index = 4, Icon = "\xe65a", SheetName = "仪器信息" });
             menuNameList.Add(new MenuName { Index = 5, Icon = "\xe659", SheetName = "车辆信息" });
             menuNameList.Add(new MenuName { Index = 6, Icon = "\xe659", SheetName = "路线信息" });
+            menuNameList.Add(new MenuName { Index = 7, Icon = "\xe653", SheetName = "用户管理" });
+
 
             this.SheetMenuListBox.ItemsSource = menuNameList;
             InitPage();
         }
-        
+
+        /// <summary>
+        /// 登录窗口
+        /// </summary>
+        public void Login()
+        {
+
+            LoginWindow loginWindow = new LoginWindow();
+            loginWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            loginWindow.ShowDialog();
+            if (loginWindow.isLogin == false)
+            {
+                MessageBox.Show("登陆失败！");
+                Application.Current.Shutdown();
+            }
+            else
+            {
+                return;
+            }
+        }
+
         /// <summary>
         /// 菜单栏类
         /// </summary>
@@ -84,6 +104,7 @@ namespace Wpf
             equipmentInfoPage = new EquipmentInfoPage();
             carInfoPage = new CarInfoPage();
             testRouteInfoPage = new TestRouteInfoPage();
+            userInfoPage = new UserInfoPage();
         }
         
         /// <summary>
@@ -115,6 +136,10 @@ namespace Wpf
             else if (this.SheetMenuListBox.SelectedIndex == 6)
             {
                 this.Change_Page.NavigationService.Navigate(testRouteInfoPage);
+            }
+            else if (this.SheetMenuListBox.SelectedIndex == 7)
+            {
+                this.Change_Page.NavigationService.Navigate(userInfoPage);
             }
         }
     

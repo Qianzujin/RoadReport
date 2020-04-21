@@ -164,20 +164,20 @@ namespace Wpf
                 ptInfo[idx] = pavementTypeWindow.ptSelf;
             }
 
-          //  if (OperationFlag == "Update")
-          //  {
-                //更新当前视图
-                this.pavementTypeInfoDataGrid.ItemsSource = null;
-                this.pavementTypeInfoDataGrid.ItemsSource = ptInfo;
-                // ptList = tr.PavementTypeInfo;
-           // }
-           // else
-           // {
-           //     //更新当前视图
-           //     this.pavementTypeInfoDataGrid.ItemsSource = null;
-           //     this.pavementTypeInfoDataGrid.ItemsSource = trSelf.PavementTypeInfo;
-           //     ptInfo = trSelf.PavementTypeInfo;
-           // }
+            //  if (OperationFlag == "Update")
+            //  {
+            //更新当前视图
+            this.pavementTypeInfoDataGrid.ItemsSource = null;
+            this.pavementTypeInfoDataGrid.ItemsSource = ptInfo;
+            // ptList = tr.PavementTypeInfo;
+            // }
+            // else
+            // {
+            //     //更新当前视图
+            //     this.pavementTypeInfoDataGrid.ItemsSource = null;
+            //     this.pavementTypeInfoDataGrid.ItemsSource = trSelf.PavementTypeInfo;
+            //     ptInfo = trSelf.PavementTypeInfo;
+            // }
             //var MyVM = this.testRouteViewModelSelf;
             //if (MyVM != null && MyVM.UpdatePavementTypeCommand.CanExecute(ptList))
             //    MyVM.UpdatePavementTypeCommand.Execute(ptList);
@@ -192,7 +192,13 @@ namespace Wpf
         /// <param name="OperationFlag">操作类型</param>
         private void Submit(object sender, RoutedEventArgs e)
         {
-
+            //先校验数据格式是否正确
+            if (Verify() == false)
+            {
+                MessageBox.Show("请检查数据格式！");
+                return;
+            }
+            //再执行相关操作
             if (OperationFlag == "Insert")
             {
                 TestRouteBase trb = new TestRouteBase
@@ -231,6 +237,7 @@ namespace Wpf
                 if (MyVM != null && MyVM.UpdateCommand.CanExecute(tr))
                     MyVM.UpdateCommand.Execute(tr);
             }
+
             this.Close();
         }
 
@@ -239,9 +246,21 @@ namespace Wpf
         /// </summary>
         /// <param name="pt"></param>
         /// <returns></returns>
-        private bool VerifyPavementType(PavementType pt)
+        private bool Verify()
         {
-            if (pt != null)
+            //先检查路面类型是否有四条
+            if (this.testRouteViewModelSelf.pavementTypeView.Count() != 4)
+            {
+                MessageBox.Show("请检查路面类型是否满足条件！");
+                return false;
+            }
+            //再检查路面基础信息
+            if (this.trbTestRoutes.Text != "" &&
+                this.trbLineMileage.Text != "" &&
+                this.trbMaterial.Text != "" &&
+                this.trbTime.Text != "" &&
+                this.trbPicture.Source != null &&
+                this.trbPicture.Source.ToString() != "")
             {
                 return true;
             }
