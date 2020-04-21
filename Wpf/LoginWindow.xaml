@@ -28,12 +28,12 @@
             <StackPanel Margin="10">
                 <WrapPanel HorizontalAlignment="Center">
                     <Label VerticalAlignment="Center" Content="用户名"></Label>
-                    <TextBox FontSize="16" Margin="8" Width="140" Height="25"></TextBox>
+                    <TextBox Name="usrName"  FontSize="16" Margin="8" Width="140" Height="25"></TextBox>
                 </WrapPanel>
                 
                 <WrapPanel HorizontalAlignment="Center">
                     <Label VerticalAlignment="Center" Content="密码"></Label>
-                    <PasswordBox   FontSize="16" Margin="15 8 8 8" Width="140" Height="25"></PasswordBox>
+                    <PasswordBox  Name="usrPassWord"  FontSize="16" Margin="15 8 8 8" Width="140" Height="25"></PasswordBox>
                 </WrapPanel>
                 <Button Click="Login" Margin="8" Width="183" Content="登陆" Foreground="White" Background="#5BBAFA" Height="25"></Button>
             </StackPanel>

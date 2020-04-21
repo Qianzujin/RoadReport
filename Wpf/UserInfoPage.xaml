@@ -22,17 +22,21 @@
                     <ComboBox  Name="carType" IsTextSearchEnabled="False" FontSize="18"  IsEditable="True"  Width="100" Height="30" >
                     </ComboBox>
                 </StackPanel>
+
+                <Button Margin="30 10 0 0" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">查询</Button>
+                <Button Margin="20 10 0 0" Click="AddUserInfo" Style="{StaticResource ButtonNormal}"  Background="White" Width="50" Height="25">新增</Button>
+
             </StackPanel>
         </Grid>
         <Grid  Grid.Row="1">
-            <DataGrid Name="testRouteDataGrid" Grid.Row="1" Margin="10"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding TestRouteBaseView }">
+            <DataGrid Name="userDataGrid" Grid.Row="1" Margin="10"  Style="{StaticResource DataGridStyle}"  ItemsSource="{Binding UserView }">
                 <DataGrid.Columns>
-                    <DataGridTextColumn  IsReadOnly="True" Width="*" Header="用户名" Binding="{Binding TestRoutes}"></DataGridTextColumn>
-                    <DataGridTextColumn IsReadOnly="True" Width="*"  Header="用户密码" Binding="{Binding LineMileage }"></DataGridTextColumn>
+                    <DataGridTextColumn  IsReadOnly="True" Width="*" Header="用户名" Binding="{Binding UserName}"></DataGridTextColumn>
+                    <DataGridTextColumn IsReadOnly="True" Width="*"  Header="用户类型" Binding="{Binding Type }"></DataGridTextColumn>
                     <DataGridTemplateColumn Width="*" Header="用户头像">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding  Picture}"></Image>
+                                <Image Source="{Binding  Picture}" ></Image>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
@@ -42,7 +46,7 @@
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" >
                                     <Button  Style="{StaticResource ButtonNormal}" Click="EditClick" Background="White" Width="50" Height="25" Margin="10 0 10 0">编辑</Button>
-                                    <Button Command="{Binding  RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:TestRouteInfoPage}},Path=DataContext.DeleteCommand,Mode=TwoWay}" CommandParameter="{Binding Index}"   Style="{StaticResource DeleteButton}"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
+                                    <Button Command="{Binding  RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type local:UserInfoPage}},Path=DataContext.DeleteCommand,Mode=TwoWay}" CommandParameter="{Binding Index}"   Style="{StaticResource DeleteButton}"  Width="50" Height="25" Margin="10 0 10 0">删除</Button>
                                 </StackPanel>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>

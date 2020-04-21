@@ -24,6 +24,7 @@
         <!--软件关闭缩小最大化Grid-->
         <Grid Grid.Row="0" Background="#5BBAFA"  >
             <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right">
+                <Label Name="usrName"></Label>
                 <Label  Style="{StaticResource LabelMouseOver}" Width="30" Content="&#xe729;" MouseDown="Min"></Label>
                 <Label Style="{StaticResource LabelMouseOver}" Width="30" Content="&#xe720;"  MouseDown="Max"></Label>
                 <Label Style="{StaticResource LabelMouseOver}" Width="30" Content="&#xe723;"  MouseDown="Close"></Label>

@@ -40,6 +40,8 @@ namespace Wpf
             InitializeComponent();
             Login();
 
+            this.usrName.Content = App.user.UserName;
+
             this.MouseLeftButtonDown += (render, e) =>
             {
                 if (e.ButtonState == MouseButtonState.Pressed)
@@ -75,8 +77,9 @@ namespace Wpf
             loginWindow.ShowDialog();
             if (loginWindow.isLogin == false)
             {
-                MessageBox.Show("登陆失败！");
-                Application.Current.Shutdown();
+                MessageBox.Show("登陆失败,请重新登录！");
+                Login();
+                //Application.Current.Shutdown();
             }
             else
             {

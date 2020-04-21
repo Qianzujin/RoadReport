@@ -96,6 +96,13 @@ namespace Wpf.Dao
             return i.ToString();
         }
 
+        public string ExecuteScalar(string sqlQuery)  
+        {
+            dbCommand = dbConnection.CreateCommand();
+            dbCommand.CommandText = sqlQuery;
+            var i = dbCommand.ExecuteScalar();
+            return i.ToString();
+        }
         /// <summary>
         /// 查询该表所有数据
         /// </summary>

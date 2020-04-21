@@ -123,6 +123,7 @@
     <Compile Include="Dao\CoverDao.cs" />
     <Compile Include="Dao\EquipmentDao.cs" />
     <Compile Include="Dao\IndexDao.cs" />
+    <Compile Include="Dao\UserDao.cs" />
     <Compile Include="Tool\SqliteDbHelper.cs" />
     <Compile Include="Dao\TestRouteDao.cs" />
     <Compile Include="EquipmentInfoPage.xaml.cs">
@@ -155,12 +156,16 @@
     <Compile Include="UserInfoPage.xaml.cs">
       <DependentUpon>UserInfoPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserWindow.xaml.cs">
+      <DependentUpon>UserWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\CarViewModel.cs" />
     <Compile Include="ViewModel\CoverViewModel.cs" />
     <Compile Include="ViewModel\EquipmentViewModel.cs" />
     <Compile Include="ViewModel\IndexViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\TestRouteViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="CarInfoPage.xaml">
       <SubType>Designer</SubType>
@@ -233,6 +238,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -98,11 +98,11 @@ namespace Wpf.ViewModel
         }
 
         //获取当前完整数据
-        public TestRoute GetCurrectTestRoute(int Index)
+        public TestRoute GetCurrectTestRoute(int index) 
         {
             foreach (var item in testRouteList)
             {
-                if (item.TestRouteBase.Index == Index)
+                if (item.TestRouteBase.Index == index) 
                 {
                     return item;
                 }
@@ -121,12 +121,12 @@ namespace Wpf.ViewModel
         //public RelayCommand<List<string>> SelectCommand { get; set; }
 
         //更新PavementTypeView显示数据集 
-        public void UpdatePavementTypeViewData(int Index)
+        public void UpdatePavementTypeViewData(int index)
         {
             pavementTypeView.Clear();
             for (int i = 0; i < testRouteList.Count(); i++)
             {
-                if (testRouteList[i].TestRouteBase.Index == Index)
+                if (testRouteList[i].TestRouteBase.Index == index)
                 {
                     foreach (var item in testRouteList[i].PavementTypeInfo)
                     {
@@ -156,9 +156,9 @@ namespace Wpf.ViewModel
         }
 
         //删除测试路线 
-        private void Delete(int Index)
-        {
-            testRouteDao.Delete(Index);
+        private void Delete(int index)
+        { 
+            testRouteDao.Delete(index); 
             SelectAll();
         }
 
@@ -191,11 +191,11 @@ namespace Wpf.ViewModel
         }
 
 
-        private void DeletePavementType(int Index)
+        private void DeletePavementType(int index)
         {
             foreach (var item in pavementTypeView)
             {
-                if (item.Index == Index)
+                if (item.Index == index)
                 {
                     pavementTypeView.Remove(item);
                 }
